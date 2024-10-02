@@ -51,6 +51,4 @@ replay_pid*
 /nbdist/
 /.nb-gradle/
 
-_00_ASBank2023/WebContent/WEB-INF/applicationContext.xml
-_00_ASBank2023/src/test/resources/TestsDaoHibernate-context.xml
-_00_ASBank2023/src/test/resources/TestsBanqueManager-context.xml
+WebContent/WEB-INF/applicationContext.xml
