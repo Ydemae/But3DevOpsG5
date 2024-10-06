@@ -56,17 +56,18 @@ INSERT INTO `Compte` (`numeroCompte`, `userId`, `solde`, `avecDecouvert`, `decou
 --
 
 CREATE TABLE IF NOT EXISTS `Utilisateur` (
-  `userId` varchar(50) NOT NULL,
-  `nom` varchar(45) NOT NULL,
-  `prenom` varchar(45) NOT NULL,
-  `adresse` varchar(100) NOT NULL,
-  `userPwd` varchar(45) DEFAULT NULL,
-  `male` bit(1) NOT NULL,
-  `type` varchar(10) NOT NULL,
-  `numClient` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`userId`),
-  UNIQUE KEY `numClient_UNIQUE` (`numClient`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+    `userId` varchar(50) NOT NULL,
+    `nom` varchar(45) NOT NULL,
+    `prenom` varchar(45) NOT NULL,
+    `adresse` varchar(100) NOT NULL,
+    `userPwd` varchar(64) DEFAULT NULL,
+    `salt` varchar(32) DEFAULT NULL,
+    `male` bit(1) NOT NULL,
+    `type` varchar(10) NOT NULL,
+    `numClient` varchar(45) DEFAULT NULL,
+    PRIMARY KEY (`userId`),
+    UNIQUE KEY `numClient_UNIQUE` (`numClient`)
+    ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `Utilisateur`

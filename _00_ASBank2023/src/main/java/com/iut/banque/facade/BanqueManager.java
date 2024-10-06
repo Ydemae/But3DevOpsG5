@@ -13,6 +13,7 @@ import com.iut.banque.modele.Compte;
 import com.iut.banque.modele.CompteAvecDecouvert;
 import com.iut.banque.modele.Gestionnaire;
 import com.iut.banque.modele.Utilisateur;
+import com.iut.banque.utils.HashManager;
 
 public class BanqueManager {
 
@@ -209,7 +210,14 @@ public class BanqueManager {
 	 */
 	public void createManager(String userId, String userPwd, String nom, String prenom, String adresse, boolean male)
 			throws TechnicalException, IllegalArgumentException, IllegalFormatException {
-		dao.createUser(nom, prenom, adresse, male, userId, userPwd, true, null);
+		//Hashing password
+
+		String[] passwordAndSalt = HashManager.HashNewPassword(userPwd);
+		if (passwordAndSalt == null){
+			// To Do - Message d'erreur car erreur de hashage
+			return;
+		}
+		dao.createUser(nom, prenom, adresse, male, userId, passwordAndSalt[0], passwordAndSalt[1],true, null);
 	}
 
 	/**
@@ -246,8 +254,15 @@ public class BanqueManager {
 						"Un client avec le numero de client " + numeroClient + " existe déjà");
 			}
 		}
-		dao.createUser(nom, prenom, adresse, male, userId, userPwd, false, numeroClient);
+		//Hashing password
 
+		String[] passwordAndSalt = HashManager.HashNewPassword(userPwd);
+		if (passwordAndSalt == null){
+			// To Do - Message d'erreur car erreur de hashage
+			return;
+		}
+		//Inserting new User into database
+		dao.createUser(nom, prenom, adresse, male, userId, passwordAndSalt[0],passwordAndSalt[1],false, numeroClient);
 	}
 
 	/**
@@ -288,5 +303,4 @@ public class BanqueManager {
 		bank.changeDecouvert(compte, nouveauDecouvert);
 		dao.updateAccount(compte);
 	}
-
 }

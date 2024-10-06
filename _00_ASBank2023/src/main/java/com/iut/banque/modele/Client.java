@@ -95,9 +95,9 @@ public class Client extends Utilisateur {
 	 * @throws IllegalFormatException
 	 * @throws IllegalArgumentException
 	 */
-	public Client(String nom, String prenom, String adresse, boolean homme, String usrId, String usrPwd,
+	public Client(String nom, String prenom, String adresse, boolean homme, String usrId, String usrPwd, String salt,
 			String numeroClient) throws IllegalArgumentException, IllegalFormatException {
-		super(nom, prenom, adresse, homme, null, usrPwd);
+		super(nom, prenom, adresse, homme, null, usrPwd, salt);
 		setUserId(usrId);
 		setNumeroClient(numeroClient);
 		this.accounts = new HashMap<String, Compte>();

@@ -46,6 +46,13 @@ public abstract class Utilisateur {
 	private String userPwd;
 
 	/**
+	 * Le salt utilisé pour hasher le mot de passe
+	 */
+	@Column(name="salt")
+	private String salt;
+
+
+	/**
 	 * Le nom de l'utilisateur.
 	 */
 	@Column(name = "nom")
@@ -153,12 +160,30 @@ public abstract class Utilisateur {
 	}
 
 	/**
+	 * @return salt : le salt utilisé pour hash le mot de passe utilisateur
+	 */
+
+	public String getSalt() {
+		return salt;
+	}
+
+	/**
 	 * @param userPwd
 	 *            : le mot de passe de l'utilisateur
 	 */
 	public void setUserPwd(String userPwd) {
 		this.userPwd = userPwd;
 	}
+
+	/**
+	 * @param salt
+	 * 			: le salt utilisé pour hash le mot de passe utilisateur
+	 */
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
+
 
 	/**
 	 * Constructeur de Utilisateur avec tous les champs de la classe comme
@@ -173,8 +198,9 @@ public abstract class Utilisateur {
 	 * @param male
 	 * @param userId
 	 * @param userPwd
+	 * @Param salt
 	 */
-	public Utilisateur(String nom, String prenom, String adresse, boolean male, String userId, String userPwd) {
+	public Utilisateur(String nom, String prenom, String adresse, boolean male, String userId, String userPwd, String salt) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -182,6 +208,7 @@ public abstract class Utilisateur {
 		this.male = male;
 		this.userId = userId;
 		this.userPwd = userPwd;
+		this.salt = salt;
 	}
 
 	/**
@@ -204,7 +231,7 @@ public abstract class Utilisateur {
 	@Override
 	public String toString() {
 		return "Utilisateur [userId=" + userId + ", nom=" + nom + ", prenom=" + prenom + ", adresse=" + adresse
-				+ ", male=" + male + ", userPwd=" + userPwd + "]";
+				+ ", male=" + male + ", userPwd=" + userPwd + ", salt=" + salt + "]";
 	}
 
 }
