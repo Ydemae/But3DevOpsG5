@@ -5,5 +5,3 @@ WORKDIR $HOME
 COPY ./pom.xml $HOME/pom.xml
 COPY ./src ./src
 COPY ./WebContent ./WebContent
-
-CMD ["tail", "-f", "/dev/null"]
