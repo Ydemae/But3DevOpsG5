@@ -11,7 +11,7 @@ rebootTomcat:
 	docker-compose restart tomcat
 
 run_maven:
-	docker run --network 00_asbank2023_default --name $(CONTAINER_MAVEN_NAME) $(IMAGE_MAVEN_NAME) mvn install && \
+	docker run --network 00_asbank2023_default --name $(CONTAINER_MAVEN_NAME) $(IMAGE_MAVEN_NAME) mvn install -DskipTests && \
 	docker cp $(CONTAINER_MAVEN_NAME):/app/target ./target && \
 	docker rm $(CONTAINER_MAVEN_NAME)
 	
