@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
     `nom` varchar(45) NOT NULL,
     `prenom` varchar(45) NOT NULL,
     `adresse` varchar(100) NOT NULL,
-    `userPwd` varchar(64) DEFAULT NULL,
+    `userPwd` varchar(128) DEFAULT NULL,
     `salt` varchar(32) DEFAULT NULL,
     `male` bit(1) NOT NULL,
     `type` varchar(10) NOT NULL,

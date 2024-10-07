@@ -1,9 +1,5 @@
 package com.iut.banque.utils;
 
-import com.iut.banque.dao.DaoHibernate;
-import com.iut.banque.interfaces.IDao;
-import com.iut.banque.modele.Utilisateur;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -11,17 +7,6 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 public class HashManager {
-    private static IDao dao ;
-
-    HashManager() {
-        super();
-    }
-
-    public void setDao(IDao dao) {
-        this.dao = dao;
-    }
-
-
     public static String[] HashNewPassword(String password) {
         /*Returns an array with two elements
         0 - Hashed password
@@ -39,6 +24,8 @@ public class HashManager {
         0 - Hashed password
         1 - Salt used to hash the password
          */
+
+        System.out.println(password);
         try {
             byte[] byteSalt = Base64.getDecoder().decode(salt);
 
@@ -47,11 +34,10 @@ public class HashManager {
 
             byte[] hashedPassword = digest.digest(password.getBytes(StandardCharsets.UTF_8));
 
-
             String[] result = new String[2];
             result[0] = Base64.getEncoder().encodeToString(hashedPassword);
             result[1] = salt;
-
+            System.out.println(result[0]);
             return result;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
@@ -59,19 +45,10 @@ public class HashManager {
         return null;
     }
 
-    private static void HashUserPassword(String userId){
-        //For development only, shouldn't ever be used in the code
-
-        Utilisateur user = dao.getUserById(userId);
-
-        System.out.println(user.toString());
-
-        if (user.getSalt() == null) {
-            //On ne veut surtout pas utiliser cette méthode sur un utilisateur ayant déjà un mot de passe hashé
-            String[] passwordAndSalt = HashNewPassword(user.getUserPwd());
-            user.setUserPwd(passwordAndSalt[0]);
-            user.setSalt(passwordAndSalt[1]);
-            dao.updateUser(user);
-        }
-    }
+    /*public static void main(String[] args) {
+        String password = "adminpass";
+        String[] results = HashNewPassword(password);
+        System.out.println(results[0]);
+        System.out.println(results[1]);
+    }*/
 }

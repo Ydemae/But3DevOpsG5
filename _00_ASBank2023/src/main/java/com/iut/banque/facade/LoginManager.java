@@ -41,7 +41,7 @@ public class LoginManager {
 		//Hashing password
 		Utilisateur user = dao.getUserById(userCde);
 
-		HashManager.HashPassword(user.getUserPwd(), user.getSalt());
+		userPwd = HashManager.HashPassword(userPwd, user.getSalt())[0];
 		//Verifying user access
 		if (dao.isUserAllowed(userCde, userPwd)) {
 			user = dao.getUserById(userCde);

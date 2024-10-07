@@ -55,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
   `nom` varchar(45) NOT NULL,
   `prenom` varchar(45) NOT NULL,
   `adresse` varchar(100) NOT NULL,
-  `userPwd` varchar(64) DEFAULT NULL,
+  `userPwd` varchar(128) DEFAULT NULL,
   `salt` varchar(32) DEFAULT NULL,
   `male` bit(1) NOT NULL,
   `type` varchar(10) NOT NULL,
@@ -70,7 +70,7 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
 
 INSERT INTO `Utilisateur` (`userId`, `nom`, `prenom`, `adresse`, `userPwd`, `salt`, `male`, `type`, `numClient`) VALUES
 ('a', 'a', 'a', 'a', 'a', NULL, b'1', 'MANAGER', NULL),
-('admin', 'Smith', 'Joe', '123, grande rue, Metz', 'adminpass', NULL,b'1', 'MANAGER', ''),
+('admin', 'Smith', 'Joe', '123, grande rue, Metz', 'ROZJ1uEpLHXvx/xyqz2XOP/3GvImvDnGxbYx7Fn/BkpTQ4ENWUVlUMd/j4omOpFDxxdPTBImBmu9x5kJUK8WGQ==', "eWyC7OBi2OeviEnX/YRKSQ==",b'1', 'MANAGER', ''),
 ('client1', 'client1', 'Jane', '45, grand boulevard, Brest', 'clientpass1',NULL , b'1', 'CLIENT', '123456789'),
 ('client2', 'client2', 'Jane', '45, grand boulevard, Brest', 'clientpass2',  NULL,b'1', 'CLIENT', '123456788');
 
