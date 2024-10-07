@@ -29,11 +29,10 @@ services:
     build:
       context: .
       dockerfile: Docker/Dockerfile.maven
-    container_name: mon_app_maven
     volumes:
       - .:/app
     command: >
-          sh -c "mvn clean install && mvn validate && exit 0 || exit 1"
+          sh -c "mvn install && mvn validate && exit 0 || exit 1"
     depends_on:
       db :
         condition: service_healthy
