@@ -44,7 +44,7 @@ services:
 
   tomcat:
     volumes:
-      - ./target:/usr/local/tomcat/webapps
+      - ./target/_00_ASBank2023-0.0.1-SNAPSHOT:/usr/local/tomcat/webapps/_00_ASBank2023
     working_dir: /app
     build:
       context: .
