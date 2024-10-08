@@ -1,5 +1,7 @@
 package com.iut.banque.controller;
 
+import java.util.logging.Logger;
+
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -15,16 +17,17 @@ import com.iut.banque.modele.Compte;
 
 public class CreerCompte extends ActionSupport {
 
+	private static Logger logger = Logger.getLogger(CreerCompte.class.getName());
 	private static final long serialVersionUID = 1L;
 	private String numeroCompte;
 	private boolean avecDecouvert;
 	private double decouvertAutorise;
-	private Client client;
+	private transient Client client;
 	private String message;
 	private boolean error;
 	private boolean result;
-	private BanqueFacade banque;
-	private Compte compte;
+	private transient BanqueFacade banque;
+	private transient Compte compte;
 
 	/**
 	 * @param compte
@@ -78,7 +81,7 @@ public class CreerCompte extends ActionSupport {
 	 * Constructeur sans paramêtre de CreerCompte
 	 */
 	public CreerCompte() {
-		System.out.println("In Constructor from CreerCompte class ");
+		logger.info("In Constructor from CreerCompte class ");
 		ApplicationContext context = WebApplicationContextUtils
 				.getRequiredWebApplicationContext(ServletActionContext.getServletContext());
 		this.banque = (BanqueFacade) context.getBean("banqueFacade");
@@ -146,15 +149,18 @@ public class CreerCompte extends ActionSupport {
 	 */
 	public void setMessage(String message) {
 		switch (message) {
-		case "NONUNIQUEID":
-			this.message = "Ce numéro de compte existe déjà !";
-			break;
-		case "INVALIDFORMAT":
-			this.message = "Ce numéro de compte n'est pas dans un format valide !";
-			break;
-		case "SUCCESS":
-			this.message = "Le compte " + compte.getNumeroCompte() + " a bien été créé.";
-			break;
+			case "NONUNIQUEID":
+				this.message = "Ce numéro de compte existe déjà !";
+				break;
+			case "INVALIDFORMAT":
+				this.message = "Ce numéro de compte n'est pas dans un format valide !";
+				break;
+			case "SUCCESS":
+				this.message = "Le compte " + compte.getNumeroCompte() + " a bien été créé.";
+				break;
+			default:
+				this.message = "Une erreur est survenue";
+				break;
 		}
 	}
 
@@ -187,21 +193,19 @@ public class CreerCompte extends ActionSupport {
 	public String creationCompte() {
 		try {
 			if (avecDecouvert) {
-				try {
-					banque.createAccount(numeroCompte, client, decouvertAutorise);
-				} catch (IllegalOperationException e) {
-					e.printStackTrace();
-				}
+				banque.createAccount(numeroCompte, client, decouvertAutorise);
 			} else {
 				banque.createAccount(numeroCompte, client);
 			}
 			this.compte = banque.getCompte(numeroCompte);
 			return "SUCCESS";
+		} catch (IllegalOperationException e) {
+			e.printStackTrace();
+			return "ERROR_ILLEGAL_OPERATION";
 		} catch (TechnicalException e) {
 			return "NONUNIQUEID";
 		} catch (IllegalFormatException e) {
 			return "INVALIDFORMAT";
 		}
-
 	}
 }
