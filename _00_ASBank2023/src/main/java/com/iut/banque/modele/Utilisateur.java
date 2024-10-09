@@ -200,7 +200,7 @@ public abstract class Utilisateur {
 	 * @param userPwd
 	 * @Param salt
 	 */
-	public Utilisateur(String nom, String prenom, String adresse, boolean male, String userId, String userPwd, String salt) {
+	protected Utilisateur(String nom, String prenom, String adresse, boolean male, String userId, String userPwd, String salt) {
 		super();
 		this.nom = nom;
 		this.prenom = prenom;
@@ -219,7 +219,7 @@ public abstract class Utilisateur {
 	 * Il est préférable d'utiliser une classe implémentant IDao pour créer un
 	 * objet au lieu d'appeler ce constructeur.
 	 */
-	public Utilisateur() {
+	protected Utilisateur() {
 		super();
 	}
 

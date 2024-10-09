@@ -5,8 +5,15 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.logging.Logger;
 
 public class HashManager {
+
+    private static Logger logger = Logger.getLogger(HashManager.class.getName());
+    private HashManager() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static String[] HashNewPassword(String password) {
         /*Returns an array with two elements
         0 - Hashed password
@@ -25,7 +32,7 @@ public class HashManager {
         1 - Salt used to hash the password
          */
 
-        System.out.println(password);
+        logger.info(password);
         try {
             byte[] byteSalt = Base64.getDecoder().decode(salt);
 
@@ -37,18 +44,11 @@ public class HashManager {
             String[] result = new String[2];
             result[0] = Base64.getEncoder().encodeToString(hashedPassword);
             result[1] = salt;
-            System.out.println(result[0]);
+            logger.info(result[0]);
             return result;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        return null;
+        return new String[0];
     }
-
-    /*public static void main(String[] args) {
-        String password = "adminpass";
-        String[] results = HashNewPassword(password);
-        System.out.println(results[0]);
-        System.out.println(results[1]);
-    }*/
 }

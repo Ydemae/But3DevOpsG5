@@ -3,6 +3,8 @@ package com.iut.banque.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
+import java.util.Collections;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -32,11 +34,12 @@ import com.iut.banque.modele.Utilisateur;
 @Transactional
 public class DaoHibernate implements IDao {
 
+	private static Logger logger = Logger.getLogger(DaoHibernate.class.getName());
 	private SessionFactory sessionFactory;
 
 	public DaoHibernate() {
-		System.out.println("==================");
-		System.out.println("Création de la Dao");
+		logger.info("==================");
+		logger.info("Création de la Dao");
 	}
 
 	/**
@@ -193,7 +196,7 @@ public class DaoHibernate implements IDao {
 		if (userId == null || userPwd == null) {
 			return false;
 		} else {
-			session = sessionFactory.openSession();
+			sessionFactory.openSession();
 			userId = userId.trim();
 			if ("".equals(userId) || "".equals(userPwd)) {
 				return false;
@@ -214,8 +217,7 @@ public class DaoHibernate implements IDao {
 	@Override
 	public Utilisateur getUserById(String id) {
 		Session session = sessionFactory.getCurrentSession();
-		Utilisateur user = session.get(Utilisateur.class, id);
-		return user;
+		return session.get(Utilisateur.class, id);
 	}
 
 	/**
@@ -226,7 +228,7 @@ public class DaoHibernate implements IDao {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		List<Object> res = session.createCriteria(Client.class).list();
-		Map<String, Client> ret = new HashMap<String, Client>();
+		Map<String, Client> ret = new HashMap<>();
 		for (Object client : res) {
 			ret.put(((Client) client).getUserId(), (Client) client);
 		}
@@ -241,7 +243,7 @@ public class DaoHibernate implements IDao {
 		Session session = sessionFactory.getCurrentSession();
 		@SuppressWarnings("unchecked")
 		List<Object> res = session.createCriteria(Gestionnaire.class).list();
-		Map<String, Gestionnaire> ret = new HashMap<String, Gestionnaire>();
+		Map<String, Gestionnaire> ret = new HashMap<>();
 		for (Object gestionnaire : res) {
 			ret.put(((Gestionnaire) gestionnaire).getUserId(), (Gestionnaire) gestionnaire);
 		}
@@ -253,7 +255,7 @@ public class DaoHibernate implements IDao {
 	 */
 	@Override
 	public void disconnect() {
-		System.out.println("Déconnexion de la DAO.");
+		logger.info("Déconnexion de la DAO.");
 	}
 
 }
