@@ -9,7 +9,8 @@ import com.iut.banque.utils.HashManager;
 public class LoginManager {
 
 	private IDao dao;
-	private Utilisateur user;
+	private Utilisateur utilisateur;
+	//rename user -> utilisateur
 
 	/**
 	 * Setter pour la DAO.
@@ -62,7 +63,7 @@ public class LoginManager {
 	 * @return Utilisateur : l'objet Utilisateur de celui qui est connecté
 	 */
 	public Utilisateur getConnectedUser() {
-		return user;
+		return utilisateur;
 	}
 
 	/**
@@ -74,14 +75,14 @@ public class LoginManager {
 	 *            l'application
 	 */
 	public void setCurrentUser(Utilisateur user) {
-		this.user = user;
+		this.utilisateur = user;
 	}
 
 	/**
 	 * Remet l'utilisateur à null et déconnecte la DAO.
 	 */
 	public void logout() {
-		this.user = null;
+		this.utilisateur = null;
 		dao.disconnect();
 	}
 }
