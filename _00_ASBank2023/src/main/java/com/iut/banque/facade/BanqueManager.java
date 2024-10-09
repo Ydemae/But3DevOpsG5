@@ -212,7 +212,7 @@ public class BanqueManager {
 			throws TechnicalException, IllegalArgumentException, IllegalFormatException {
 		//Hashing password
 
-		String[] passwordAndSalt = HashManager.HashNewPassword(userPwd);
+		String[] passwordAndSalt = HashManager.hashNewPassword(userPwd);
 		if (passwordAndSalt == null){
 			// To Do - Message d'erreur car erreur de hashage
 			return;
@@ -256,7 +256,7 @@ public class BanqueManager {
 		}
 		//Hashing password
 
-		String[] passwordAndSalt = HashManager.HashNewPassword(userPwd);
+		String[] passwordAndSalt = HashManager.hashNewPassword(userPwd);
 		if (passwordAndSalt == null){
 			// To Do - Message d'erreur car erreur de hashage
 			return;

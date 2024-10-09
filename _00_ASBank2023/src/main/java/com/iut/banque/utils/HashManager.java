@@ -14,7 +14,7 @@ public class HashManager {
         throw new IllegalStateException("Utility class");
     }
 
-    public static String[] HashNewPassword(String password) {
+    public static String[] hashNewPassword(String password) {
         /*Returns an array with two elements
         0 - Hashed password
         1 - Salt used to hash the password
@@ -22,11 +22,11 @@ public class HashManager {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);
-        return HashPassword(password, Base64.getEncoder().encodeToString(salt));
+        return hashPassword(password, Base64.getEncoder().encodeToString(salt));
     }
 
 
-    public static String[] HashPassword(String password, String salt){
+    public static String[] hashPassword(String password, String salt){
          /*Returns an array with two elements
         0 - Hashed password
         1 - Salt used to hash the password
