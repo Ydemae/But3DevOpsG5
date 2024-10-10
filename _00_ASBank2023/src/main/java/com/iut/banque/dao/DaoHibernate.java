@@ -1,5 +1,6 @@
 package com.iut.banque.dao;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -125,7 +126,7 @@ public class DaoHibernate implements IDao {
 		if (client != null) {
 			return client.getAccounts();
 		} else {
-			return null;
+			return Collections.emptyMap();
 		}
 	}
 

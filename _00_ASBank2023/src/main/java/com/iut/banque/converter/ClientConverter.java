@@ -32,7 +32,7 @@ public class ClientConverter extends StrutsTypeConverter {
 	 * Ainsi, au chargement de l'application, trois objets de cette classe sont
 	 * instanciés et seulement le premier a une DAO injectée correctement.
 	 */
-	private static IDao dao;
+	private IDao dao;
 
 	/**
 	 * Constructeur avec paramêtre pour le ClientConverter.
@@ -44,7 +44,7 @@ public class ClientConverter extends StrutsTypeConverter {
 	public ClientConverter(IDao dao) {
 		logger.info("=========================");
 		logger.info("Création du convertisseur de client");
-		ClientConverter.dao = dao;
+		this.dao = dao;
 	}
 
 	/**
