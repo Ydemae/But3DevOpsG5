@@ -6,3 +6,4 @@ _00_ASBank2023/src/test/resources/TestsBanqueManager-context.xml
 
 /.idea/
 */.idea/**
+.idea/*
