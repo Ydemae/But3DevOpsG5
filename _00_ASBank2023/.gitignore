@@ -52,3 +52,5 @@ replay_pid*
 /.nb-gradle/
 
 WebContent/WEB-INF/applicationContext.xml
+
+*.idea
