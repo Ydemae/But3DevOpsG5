@@ -46,6 +46,7 @@ public class LoginManager {
 		//Verifying user access
 		if (dao.isUserAllowed(userCde, userPwd)) {
 			user = dao.getUserById(userCde);
+			setCurrentUser(user);
 			if (user instanceof Gestionnaire) {
 				return LoginConstants.MANAGER_IS_CONNECTED;
 			} else {
