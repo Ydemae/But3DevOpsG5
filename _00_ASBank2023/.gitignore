@@ -43,6 +43,9 @@ replay_pid*
 *.iml
 *.ipr
 
+/.idea/
+*/.idea/**
+
 ### NetBeans ###
 /nbproject/private/
 /build/

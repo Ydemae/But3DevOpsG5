@@ -173,7 +173,7 @@ public class TestsDaoHibernate {
 	@Test
 	public void testGetAccountsByUserIdExist() {
 		Map<String, Compte> accounts = daoHibernate.getAccountsByClientId("g.descomptes");
-		if (accounts == null) {
+		if (accounts.isEmpty()) {
 			fail("Ce client devrait avoir des comptes.");
 		} else if (!daoHibernate.getAccountById("SA1011011011").equals(accounts.get("SA1011011011"))
 				&& !daoHibernate.getAccountById("AV1011011011").equals(accounts.get("AV1011011011"))) {
@@ -194,7 +194,7 @@ public class TestsDaoHibernate {
 	@Test
 	public void testGetAccountsByUserIdDoesntExist() {
 		Map<String, Compte> accounts = daoHibernate.getAccountsByClientId("c.doesntexit");
-		if (accounts != null) {
+		if (!accounts.isEmpty()) {
 			fail("Les comptes de cette utilisateur inexistant n'aurait pas du être renvoyés.");
 		}
 	}
@@ -341,7 +341,4 @@ public class TestsDaoHibernate {
 	}
 
 	// TODO À implémenter lorsque disconnect() le sera
-	/*
-	 * @Test public void testDisconnect() { fail("Not yet implemented"); }
-	 */
 }
