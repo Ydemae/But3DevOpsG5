@@ -1,7 +1,3 @@
-# Compile avec Maven
 FROM maven:3-openjdk-11
-ENV HOME=/app
-WORKDIR $HOME
-COPY ./pom.xml $HOME/pom.xml
-COPY ./src ./src
-COPY ./WebContent ./WebContent
+WORKDIR /app
+CMD ["tail", "-f", "/dev/null"]
