@@ -43,6 +43,9 @@ replay_pid*
 *.iml
 *.ipr
 
+/.idea/
+*/.idea/**
+
 ### NetBeans ###
 /nbproject/private/
 /build/
@@ -52,5 +55,3 @@ replay_pid*
 /.nb-gradle/
 
 WebContent/WEB-INF/applicationContext.xml
-
-*.idea
