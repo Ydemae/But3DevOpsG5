@@ -1,8 +1,10 @@
 FROM maven:3-openjdk-11
 
-RUN echo 'mvn jacoco:prepare-agent test install jacoco:report -P docker' > test_coverage.sh && chmod +x test_coverage.sh
-
-RUN echo 'mvn clear install -P docker' > compile.sh && chmod +x compile.sh
-
 WORKDIR /app
+
+# RUN echo 'mvn jacoco:prepare-agent test install jacoco:report -P docker' > test_coverage.sh && chmod +x test_coverage.sh
+
+# RUN echo 'mvn clear install -P docker' > compile.sh && chmod +x compile.sh
+
+
 CMD ["tail", "-f", "/dev/null"]
