@@ -1,12 +1,9 @@
-package com.iut.banque.test.modele;
+package com.iut.banque.modele;
 
 import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
-import com.iut.banque.modele.Client;
-import com.iut.banque.modele.CompteAvecDecouvert;
-import com.iut.banque.modele.CompteSansDecouvert;
 
 public class TestsClient {
 

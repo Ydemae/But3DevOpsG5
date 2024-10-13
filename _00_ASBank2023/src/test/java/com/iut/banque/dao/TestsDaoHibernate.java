@@ -1,4 +1,4 @@
-package com.iut.banque.test.dao;
+package com.iut.banque.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -13,7 +13,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.iut.banque.dao.DaoHibernate;
 import com.iut.banque.exceptions.IllegalFormatException;
 import com.iut.banque.exceptions.IllegalOperationException;
 import com.iut.banque.exceptions.TechnicalException;

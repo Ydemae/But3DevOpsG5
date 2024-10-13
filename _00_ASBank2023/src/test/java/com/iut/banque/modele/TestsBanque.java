@@ -1,9 +1,8 @@
-package com.iut.banque.test.modele;
+package com.iut.banque.modele;
 
 import com.iut.banque.exceptions.IllegalFormatException;
 import com.iut.banque.exceptions.IllegalOperationException;
 import com.iut.banque.exceptions.InsufficientFundsException;
-import com.iut.banque.modele.*;
 import org.junit.Assert;
 import org.junit.Test;
 

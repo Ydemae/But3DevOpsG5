@@ -1,4 +1,4 @@
-package com.iut.banque.test.modele;
+package com.iut.banque.modele;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -7,9 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.iut.banque.exceptions.IllegalFormatException;
-import com.iut.banque.modele.Client;
-import com.iut.banque.modele.Compte;
-import com.iut.banque.modele.CompteSansDecouvert;
 
 /**
  * Tests en rapport avec la méthode "créditer" de la classe Banque

@@ -1,4 +1,4 @@
-package com.iut.banque.test.facade;
+package com.iut.banque.facade;
 
 import static org.junit.Assert.fail;
 
@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.iut.banque.exceptions.IllegalOperationException;
-import com.iut.banque.facade.BanqueManager;
 
 //@RunWith indique à JUnit de prendre le class runner de Spirng
 @RunWith(SpringJUnit4ClassRunner.class)

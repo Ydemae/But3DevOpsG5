@@ -1,6 +1,5 @@
-package com.iut.banque.test.utils;
+package com.iut.banque.utils;
 
-import com.iut.banque.utils.HashManager;
 import org.junit.Assert;
 import org.junit.Test;
 
