@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class HashManager {
 
     private static Logger logger = Logger.getLogger(HashManager.class.getName());
-    private HashManager() {
+    public HashManager() {
         throw new IllegalStateException("Utility class");
     }
 
@@ -51,6 +51,5 @@ public class HashManager {
         }
         return new String[0];
     }
-
 
 }
