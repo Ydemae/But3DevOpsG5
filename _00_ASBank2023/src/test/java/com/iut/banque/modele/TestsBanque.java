@@ -42,7 +42,9 @@ public class TestsBanque {
             banque.debiter(testCompte, 100);
             Assert.fail("Un compte sans découvert est passé en découvert");
         }
-        catch (InsufficientFundsException e){}
+        catch (InsufficientFundsException e){
+            return;
+        }
 
     }
 
