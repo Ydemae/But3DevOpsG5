@@ -33,7 +33,7 @@ public class TestsBanque {
     }
 
     @Test
-    public void TestDebiterCompteSansDecouvertSolde0() throws IllegalFormatException {
+    public void testDebiterCompteSansDecouvertSolde0() throws IllegalFormatException {
         banque = new Banque();
 
         Compte testCompte = new CompteSansDecouvert("WU1234567890", 0, new Client());
@@ -47,7 +47,7 @@ public class TestsBanque {
     }
 
     @Test
-    public void TestDebiterCompteAvecDecouvertSolde0() throws IllegalOperationException, IllegalFormatException {
+    public void testDebiterCompteAvecDecouvertSolde0() throws IllegalOperationException, IllegalFormatException {
         banque = new Banque();
 
         Compte testCompte = new CompteAvecDecouvert("WU1234567890", 0, 100, new Client());
@@ -67,7 +67,7 @@ public class TestsBanque {
     //Tests créditer
 
     @Test
-    public void TestCrediterCompte() throws IllegalFormatException {
+    public void testCrediterCompte() throws IllegalFormatException {
         banque = new Banque();
 
         Compte testCompte = new CompteSansDecouvert("WU1234567890", 0, new Client());
@@ -129,7 +129,7 @@ public class TestsBanque {
     //Tests changeDecouvert
 
     @Test
-    public void TestChangeDecouvert() throws IllegalOperationException, IllegalFormatException {
+    public void testChangeDecouvert() throws IllegalOperationException, IllegalFormatException {
         banque = new Banque();
 
         CompteAvecDecouvert testCompte = new CompteAvecDecouvert("WU1234567890", 0, 1, new Client());
