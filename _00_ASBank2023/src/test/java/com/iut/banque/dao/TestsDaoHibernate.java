@@ -6,6 +6,7 @@ import static org.junit.Assert.fail;
 
 import java.util.Map;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -338,6 +339,55 @@ public class TestsDaoHibernate {
 		assertEquals(false, daoHibernate.isUserAllowed("   ", "TEST PASS"));
 		assertEquals(false, daoHibernate.isUserAllowed("    ", "TEST PASS"));
 	}
+
+	@Test
+	public void testUserUpdate(){
+		try {
+			try {
+				daoHibernate.createUser("NOM", "PRENOM", "ADRESSE", true, "c.new1", "PASS", null,false, "5544554455");
+			} catch (IllegalArgumentException e) {
+				fail("Il ne devrait pas y avoir d'exception ici");
+			} catch (IllegalFormatException e) {
+				fail("Il ne devrait pas y avoir d'exception ici");
+			}
+		} catch (TechnicalException he) {
+			fail("L'utilisateur aurait du être créé.");
+		}
+		try{
+			Utilisateur user = daoHibernate.getUserById("c.new1");
+			user.setNom("Bidule");
+			daoHibernate.updateUser(user);
+		}
+		catch (Exception e){
+			fail("Il ne devrait pas y avoir d'exception ici");
+		}
+
+		Utilisateur updatedUser = daoHibernate.getUserById("c.new1");
+		assertEquals("Bidule", updatedUser.getNom());
+	}
+
+	@Test
+	public void testUpdateAccount(){
+		Client client = (Client) daoHibernate.getUserById("c.exist");
+		String id = "NW1010010001";
+		try {
+			Compte compte = daoHibernate.createCompteAvecDecouvert(0, id, 100, client);
+			compte.crediter(100);
+			daoHibernate.updateAccount(compte);
+			Compte updatedCompte = daoHibernate.getAccountById(id);
+			if (updatedCompte.getSolde() != 100) {
+				fail("Le compte n'a pas été update correctement");
+			}
+		} catch (TechnicalException | IllegalFormatException | IllegalOperationException e) {
+			e.printStackTrace();
+			fail("Il ne devrait pas y avoir d'exception ici");
+		}
+
+
+
+	}
+
+
 
 	// TODO À implémenter lorsque disconnect() le sera
 }
