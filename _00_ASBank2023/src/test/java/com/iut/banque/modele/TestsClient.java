@@ -1,9 +1,7 @@
 package com.iut.banque.modele;
 
 import static org.junit.Assert.fail;
-import static org.junit.jupiter.api.Assertions.fail;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
+
 import org.junit.Test;
 
 
@@ -13,70 +11,82 @@ public class TestsClient {
 	 * Tests successifs de la méthode de vérification du format de numéro de
 	 * client
 	 */
-
 	@Test
-	public void testMethodeCheckFormatUserId() {
+	public void testMethodeCheckFormatUserIdClientCorrect() {
 		String strClient = "a.utilisateur928";
 		if (!Client.checkFormatUserIdClient(strClient)) {
-			fail("String" + strClient + " refusé dans le test");
+			fail("String " + strClient + " refusé dans le test");
 		}
-		strClient = "32a.abc1";
-		if (Client.checkFormatUserIdClient(strClient)) {
-			fail("String " + strClient + " validé dans le test");
-		}
-		strClient = "aaa.abc1";
-		if (Client.checkFormatUserIdClient(strClient)) {
-			fail("String " + strClient + " validé dans le test");
-		}
-		strClient = "abc1";
-		if (Client.checkFormatUserIdClient(strClient)) {
-			fail("String " + strClient + " validé dans le test");
-		}
-		strClient = "";
-		if (Client.checkFormatUserIdClient(strClient)) {
-			fail("String " + strClient + " validé dans le test");
-		}
-		strClient = "a.138";
-		if (Client.checkFormatUserIdClient(strClient)) {
-			fail("String " + strClient + " validé dans le test");
-		}
-		strClient = "a.a1";
-		if (Client.checkFormatUserIdClient(strClient)) {
-			fail("String " + strClient + " validé dans le test");
-		}
-		strClient = "a.bcdé1";
-		if (Client.checkFormatUserIdClient(strClient)) {
-			fail("String " + strClient + " validé dans le test");
-		}
-		strClient = "a.abc01";
-		if (Client.checkFormatUserIdClient(strClient)) {
-			fail("String " + strClient + " validé dans le test");
-		}
-		strClient = "a.ab.c1";
+	}
+
+	@Test
+	public void testMethodeCheckFormatUserIdClientCommencantParUnChiffre() {
+		String strClient = "32a.abc1";
 		if (Client.checkFormatUserIdClient(strClient)) {
 			fail("String " + strClient + " validé dans le test");
 		}
 	}
+
 	@Test
-	public void testMethodeCheckFormatNumeroClient() {
-		String strClient = "1234567890";
-		if (!Client.checkFormatNumeroClient(strClient)) {
+	public void testMethodeCheckFormatUserIdClientCommencantParPlusieursLettres() {
+		String strClient = "aaa.abc1";
+		if (Client.checkFormatUserIdClient(strClient)) {
+			fail("String " + strClient + " validé dans le test");
+		}
+	}
+
+	@Test
+	public void testMethodeCheckFormatUserIdClientSansPointSeparateur() {
+		String strClient = "abc1";
+		if (Client.checkFormatUserIdClient(strClient)) {
+			fail("String " + strClient + " validé dans le test");
+		}
+	}
+
+	@Test
+	public void testMethodeCheckFormatUserIdClientChaineVide() {
+		String strClient = "";
+		if (Client.checkFormatUserIdClient(strClient)) {
+			fail("String " + strClient + " validé dans le test");
+		}
+	}
+
+	@Test
+	public void testMethodeCheckFormatUserIdClientSansLettresApresLePointSeparateur() {
+		String strClient = "a.138";
+		if (Client.checkFormatUserIdClient(strClient)) {
+			fail("String " + strClient + " validé dans le test");
+		}
+	}
+
+	@Test
+	public void testMethodeCheckFormatUserIdClientAvecUneSeuleLettreApresLePointSeparateur() {
+		String strClient = "a.a1";
+		if (!Client.checkFormatUserIdClient(strClient)) {
 			fail("String " + strClient + " refusé dans le test");
 		}
-		strClient = "12a456789";
-		if (Client.checkFormatNumeroClient(strClient)) {
+	}
+
+	@Test
+	public void testMethodeCheckFormatUserIdClientAvecCaractereSpecial() {
+		String strClient = "a.bcdé1";
+		if (Client.checkFormatUserIdClient(strClient)) {
 			fail("String " + strClient + " validé dans le test");
 		}
-		strClient = "12#456789";
-		if (Client.checkFormatNumeroClient(strClient)) {
+	}
+
+	@Test
+	public void testMethodeCheckFormatUserIdClientAvecTrailingZeros() {
+		String strClient = "a.abc01";
+		if (Client.checkFormatUserIdClient(strClient)) {
 			fail("String " + strClient + " validé dans le test");
 		}
-		strClient = "12345678";
-		if (Client.checkFormatNumeroClient(strClient)) {
-			fail("String " + strClient + " validé dans le test");
-		}
-		strClient = "12345678901";
-		if (Client.checkFormatNumeroClient(strClient)) {
+	}
+
+	@Test
+	public void testMethodeCheckFormatUserIdClientAvecPlusieursPointsSeparateurs() {
+		String strClient = "a.ab.c1";
+		if (Client.checkFormatUserIdClient(strClient)) {
 			fail("String " + strClient + " validé dans le test");
 		}
 	}
@@ -85,6 +95,45 @@ public class TestsClient {
 	 * Tests successifs de la méthode de vérification du format du numéro de
 	 * client
 	 */
+	@Test
+	public void testMethodeCheckFormatNumeroClientCorrect() {
+		String strClient = "1234567890";
+		if (!Client.checkFormatNumeroClient(strClient)) {
+			fail("String " + strClient + " refusé dans le test");
+		}
+	}
+
+	@Test
+	public void testMethodeCheckFormatNumeroClientAvecLettre() {
+		String strClient = "12a456789";
+		if (Client.checkFormatNumeroClient(strClient)) {
+			fail("String " + strClient + " validé dans le test");
+		}
+	}
+
+	@Test
+	public void testMethodeCheckFormatNumeroClientAvecCaractereSpecial() {
+		String strClient = "12#456789";
+		if (Client.checkFormatNumeroClient(strClient)) {
+			fail("String " + strClient + " validé dans le test");
+		}
+	}
+
+	@Test
+	public void testMethodeCheckFormatNumeroClientAvecMoinsDeNeufChiffres() {
+		String strClient = "12345678";
+		if (Client.checkFormatNumeroClient(strClient)) {
+			fail("String " + strClient + " validé dans le test");
+		}
+	}
+
+	@Test
+	public void testMethodeCheckFormatNumeroClientAvecPlusDeDixChiffres() {
+		String strClient = "12345678901";
+		if (Client.checkFormatNumeroClient(strClient)) {
+			fail("String " + strClient + " validé dans le test");
+		}
+	}
 
 	/**
 	 * Tests de la méthode possedeComptesADecouvert
