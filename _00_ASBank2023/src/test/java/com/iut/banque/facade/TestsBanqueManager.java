@@ -1,4 +1,4 @@
-package com.iut.banque.test.facade;
+package com.iut.banque.facade;
 
 import static org.junit.Assert.fail;
 
@@ -10,7 +10,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.iut.banque.exceptions.IllegalOperationException;
-import com.iut.banque.facade.BanqueManager;
 
 //@RunWith indique à JUnit de prendre le class runner de Spirng
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -26,110 +25,106 @@ public class TestsBanqueManager {
 
 	// Tests de par rapport à l'ajout d'un client
 	@Test
-	public void TestCreationDunClient() {
+	public void testCreationDunClient() {
 		try {
 			bm.loadAllClients();
 			bm.createClient("t.test1", "password", "test1nom", "test1prenom", "test town", true, "4242424242");
 		} catch (IllegalOperationException e) {
-			e.printStackTrace();
-			fail("IllegalOperationException récupérée : " + e.getStackTrace());
+			failIllegalOperationExeption(e);
 		} catch (Exception te) {
-			te.printStackTrace();
-			fail("Une Exception " + te.getClass().getSimpleName() + " a été récupérée");
+			failExeption(te);
 		}
 	}
 
 	@Test
-	public void TestCreationDunClientAvecDeuxNumerosDeCompteIdentiques() {
+	public void testCreationDunClientAvecDeuxNumerosDeCompteIdentiques() {
 		try {
 			bm.loadAllClients();
 			bm.createClient("t.test1", "password", "test1nom", "test1prenom", "test town", true, "0101010101");
-			fail();
-		} catch (IllegalOperationException e) {
+			fail("Une IllegalOperationException aurait dû être récupérée");
 		} catch (Exception te) {
-			te.printStackTrace();
-			fail("Une Exception " + te.getClass().getSimpleName() + " a été récupérée");
+			if(!(te instanceof IllegalOperationException)){
+				failExeption(te);
+			}
 		}
 	}
 
 	// Tests par rapport à la suppression de comptes
 	@Test
-	public void TestSuppressionDunCompteAvecDecouvertAvecSoldeZero() {
+	public void testSuppressionDunCompteAvecDecouvertAvecSoldeZero() {
 		try {
 
 			bm.deleteAccount(bm.getAccountById("CADV000000"));
 		} catch (IllegalOperationException e) {
-			e.printStackTrace();
-			fail("IllegalOperationException récupérée : " + e.getStackTrace());
+			failIllegalOperationExeption(e);
 		} catch (Exception te) {
-			fail("Une Exception " + te.getClass().getSimpleName() + " a été récupérée");
+			failExeption(te);
 		}
 	}
 
 	@Test
-	public void TestSuppressionDunCompteAvecDecouvertAvecSoldeDifferentDeZero() {
+	public void testSuppressionDunCompteAvecDecouvertAvecSoldeDifferentDeZero() {
 		try {
 			bm.deleteAccount(bm.getAccountById("CADNV00000"));
 			fail("Une IllegalOperationException aurait dû être récupérée");
-		} catch (IllegalOperationException e) {
 		} catch (Exception te) {
-			fail("Une Exception " + te.getClass().getSimpleName() + " a été récupérée");
+			if(!(te instanceof IllegalOperationException)){
+				failExeption(te);
+			}
 		}
 	}
 
 	@Test
-	public void TestSuppressionDunCompteSansDecouvertAvecSoldeZero() {
+	public void testSuppressionDunCompteSansDecouvertAvecSoldeZero() {
 		try {
 			bm.deleteAccount(bm.getAccountById("CSDV000000"));
 		} catch (IllegalOperationException e) {
-			e.printStackTrace();
-			fail("IllegalOperationException récupérée : " + e.getStackTrace());
+			failIllegalOperationExeption(e);
 		} catch (Exception te) {
-			fail("Une Exception " + te.getClass().getSimpleName() + " a été récupérée");
+			failExeption(te);
 		}
 	}
 
 	@Test
-	public void TestSuppressionDunCompteSansDecouvertAvecSoldeDifferentDeZero() {
+	public void testSuppressionDunCompteSansDecouvertAvecSoldeDifferentDeZero() {
 		try {
 			bm.deleteAccount(bm.getAccountById("CSDNV00000"));
 			fail("Une IllegalOperationException aurait dû être récupérée");
-		} catch (IllegalOperationException e) {
 		} catch (Exception te) {
-			fail("Une Exception " + te.getClass().getSimpleName() + " a été récupérée");
+			if(!(te instanceof IllegalOperationException)){
+				failExeption(te);
+			}
 		}
 	}
 
 	// Tests en rapport avec la suppression d'utilisateurs
 	@Test
-	public void TestSuppressionDunUtilisateurSansCompte() {
+	public void testSuppressionDunUtilisateurSansCompte() {
 		try {
 			bm.loadAllClients();
 			bm.deleteUser(bm.getUserById("g.pasdecompte"));
 		} catch (IllegalOperationException e) {
-			e.printStackTrace();
-			fail("IllegalOperationException récupérée : " + e.getStackTrace());
+			failIllegalOperationExeption(e);
 		} catch (Exception te) {
-			te.printStackTrace();
-			fail("Une Exception " + te.getClass().getSimpleName() + " a été récupérée");
+			failExeption(te);
 		}
 	}
 
 	@Test
-	public void TestSuppressionDuDernierManagerDeLaBaseDeDonnees() {
+	public void testSuppressionDuDernierManagerDeLaBaseDeDonnees() {
 		bm.loadAllGestionnaires();
 		try {
 			bm.deleteUser(bm.getUserById("admin"));
 			fail("Une IllegalOperationException aurait dû être récupérée");
-		} catch (IllegalOperationException e) {
 		} catch (Exception te) {
-			te.printStackTrace();
-			fail("Une Exception " + te.getClass().getSimpleName() + " a été récupérée");
+			if(!(te instanceof IllegalOperationException)){
+				failExeption(te);
+			}
 		}
 	}
 
 	@Test
-	public void TestSuppressionDunClientAvecComptesDeSoldeZero() {
+	public void testSuppressionDunClientAvecComptesDeSoldeZero() {
 		try {
 			bm.loadAllClients();
 			bm.deleteUser(bm.getUserById("g.descomptesvides"));
@@ -137,34 +132,44 @@ public class TestsBanqueManager {
 				fail("Les comptes de l'utilisateur sont encore présents dans la base de données");
 			}
 		} catch (IllegalOperationException e) {
-			e.printStackTrace();
-			fail("IllegalOperationException récupérée : " + e.getStackTrace());
+			failIllegalOperationExeption(e);
 		} catch (Exception te) {
-			te.printStackTrace();
-			fail("Une Exception " + te.getClass().getSimpleName() + " a été récupérée");
+			failExeption(te);
 		}
 	}
 
 	@Test
-	public void TestSuppressionDunClientAvecUnCompteDeSoldePositif() {
+	public void testSuppressionDunClientAvecUnCompteDeSoldePositif() {
 		try {
 			bm.deleteUser(bm.getUserById("j.doe1"));
 			fail("Une IllegalOperationException aurait dû être récupérée");
-		} catch (IllegalOperationException e) {
 		} catch (Exception te) {
-			fail("Une Exception " + te.getClass().getSimpleName() + " a été récupérée");
+			if(!(te instanceof IllegalOperationException)){
+				failExeption(te);
+			}
 		}
 	}
 
 	@Test
-	public void TestSuppressionDunClientAvecUnCompteAvecDecouvertDeSoldeNegatif() {
+	public void testSuppressionDunClientAvecUnCompteAvecDecouvertDeSoldeNegatif() {
 		try {
 			bm.deleteUser(bm.getUserById("j.doe1"));
 			fail("Une IllegalOperationException aurait dû être récupérée");
-		} catch (IllegalOperationException e) {
 		} catch (Exception te) {
-			fail("Une Exception " + te.getClass().getSimpleName() + " a été récupérée");
+			if(!(te instanceof IllegalOperationException)){
+				failExeption(te);
+			}
 		}
+	}
+
+	private void failExeption(Exception te) {
+		te.printStackTrace();
+		fail("Une Exception " + te.getClass().getSimpleName() + " a été récupérée");
+	}
+
+	private void failIllegalOperationExeption(IllegalOperationException e) {
+		e.printStackTrace();
+		fail("IllegalOperationException récupérée : " + e.getStackTrace());
 	}
 
 }

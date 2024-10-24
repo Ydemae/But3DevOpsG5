@@ -52,5 +52,4 @@ public class HashManager {
         return new String[0];
     }
 
-
 }

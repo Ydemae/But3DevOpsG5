@@ -3,14 +3,14 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<html lang="fr">
 <script type="text/javascript">
 	function DisplayMessage() {
 		alert('Ce TD a été donné pour les AS dans le cadre du cours de CO Avancé (Promotion 2017-2018)');
 	}
 </script>
 <link rel="stylesheet" href="/_00_ASBank2023/style/style.css" />
-<link href="/_00_ASBank2023/style/favicon.ico" rel="icon"
+<link href="/_00_ASBank2023/style/favicon.png" rel="icon"
 	type="image/x-icon" />
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,7 +20,7 @@
 	<h1>Bienvenue sur l'application IUT Bank 2023</h1>
 	<p>
 		<img
-			src="https://www.iut-metz.univ-lorraine.fr/images/AdminSite/Logos/Logo_IUT_Metz.UL.small.png"
+			src="https://imgs.search.brave.com/P23fBts9D6Ds8ARzf6vORrTmA21cwWe_3LWyN2eqDu8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mb3Jt/YXRpb25zLnVuaXYt/bG9ycmFpbmUuZnIv/aW1nL3N1LzQ1Lmpw/Zw"
 			alt="logo" />
 	</p>
 	<input type="button" value="Information" name="info"
