@@ -41,11 +41,11 @@ public class TestsBanqueManager {
 		try {
 			bm.loadAllClients();
 			bm.createClient("t.test1", "password", "test1nom", "test1prenom", "test town", true, "0101010101");
-			fail();
-		} catch (IllegalOperationException e) {
-			return;
+			fail("Une IllegalOperationException aurait dû être récupérée");
 		} catch (Exception te) {
-			failExeption(te);
+			if(!(te instanceof IllegalOperationException)){
+				failExeption(te);
+			}
 		}
 	}
 
@@ -67,10 +67,10 @@ public class TestsBanqueManager {
 		try {
 			bm.deleteAccount(bm.getAccountById("CADNV00000"));
 			fail("Une IllegalOperationException aurait dû être récupérée");
-		} catch (IllegalOperationException e) {
-			return;
 		} catch (Exception te) {
-			failExeption(te);
+			if(!(te instanceof IllegalOperationException)){
+				failExeption(te);
+			}
 		}
 	}
 
@@ -90,10 +90,10 @@ public class TestsBanqueManager {
 		try {
 			bm.deleteAccount(bm.getAccountById("CSDNV00000"));
 			fail("Une IllegalOperationException aurait dû être récupérée");
-		} catch (IllegalOperationException e) {
-			return;
 		} catch (Exception te) {
-			failExeption(te);
+			if(!(te instanceof IllegalOperationException)){
+				failExeption(te);
+			}
 		}
 	}
 
@@ -116,10 +116,10 @@ public class TestsBanqueManager {
 		try {
 			bm.deleteUser(bm.getUserById("admin"));
 			fail("Une IllegalOperationException aurait dû être récupérée");
-		} catch (IllegalOperationException e) {
-			return;
 		} catch (Exception te) {
-			failExeption(te);
+			if(!(te instanceof IllegalOperationException)){
+				failExeption(te);
+			}
 		}
 	}
 
@@ -143,10 +143,10 @@ public class TestsBanqueManager {
 		try {
 			bm.deleteUser(bm.getUserById("j.doe1"));
 			fail("Une IllegalOperationException aurait dû être récupérée");
-		} catch (IllegalOperationException e) {
-			return;
 		} catch (Exception te) {
-			failExeption(te);
+			if(!(te instanceof IllegalOperationException)){
+				failExeption(te);
+			}
 		}
 	}
 
@@ -155,10 +155,10 @@ public class TestsBanqueManager {
 		try {
 			bm.deleteUser(bm.getUserById("j.doe1"));
 			fail("Une IllegalOperationException aurait dû être récupérée");
-		} catch (IllegalOperationException e) {
-			return;
 		} catch (Exception te) {
-			failExeption(te);
+			if(!(te instanceof IllegalOperationException)){
+				failExeption(te);
+			}
 		}
 	}
 
