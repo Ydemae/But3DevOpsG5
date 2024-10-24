@@ -39,14 +39,5 @@ public class TestsHashManager {
         Assert.assertEquals(passwordAndSalt[0],hashedPass);
         Assert.assertEquals(passwordAndSalt[1],salt);
     }
-
-    @Test
-    public void testConstructor(){
-        try{
-            HashManager hashManager = new HashManager();
-            Assert.fail("le constructuer du HashManager a été appelé mais n'a pas renvoyé l'exception IllegalStateException");
-        }
-        catch (IllegalStateException e){}
-    }
 }
 

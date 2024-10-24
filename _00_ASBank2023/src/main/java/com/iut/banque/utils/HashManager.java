@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 public class HashManager {
 
     private static Logger logger = Logger.getLogger(HashManager.class.getName());
-    public HashManager() {
+    private HashManager() {
         throw new IllegalStateException("Utility class");
     }
 
