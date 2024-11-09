@@ -51,7 +51,6 @@ public class TestsCompte {
 			compte.crediter(-100);
 			fail("La méthode n'a pas renvoyé d'exception!");
 		} catch (IllegalFormatException ife) {
-			return;
 		} catch (Exception e) {
 			fail("Exception de type " + e.getClass().getSimpleName()
 					+ " récupérée alors qu'un IllegalFormatException était attendu");
@@ -69,7 +68,6 @@ public class TestsCompte {
 			compte = new CompteSansDecouvert("&éþ_ëüú¤", 0, new Client());
 			fail("Exception non renvoyée par le constructeur avec un format de numéro de compte incorrect");
 		} catch (IllegalFormatException ife) {
-			return;
 		} catch (Exception e) {
 			fail("Exception de type " + e.getClass().getSimpleName()
 					+ " récupérée à la place d'une de type IllegalFormatException");

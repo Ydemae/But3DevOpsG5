@@ -23,6 +23,8 @@ public class TestsBanqueManager {
 	@Autowired
 	private BanqueManager bm;
 
+	private static final String ILLEGAL_OP_EXEP = "Une IllegalOperationException aurait dû être récupérée";
+
 	// Tests de par rapport à l'ajout d'un client
 	@Test
 	public void testCreationDunClient() {
@@ -41,7 +43,7 @@ public class TestsBanqueManager {
 		try {
 			bm.loadAllClients();
 			bm.createClient("t.test1", "password", "test1nom", "test1prenom", "test town", true, "0101010101");
-			fail("Une IllegalOperationException aurait dû être récupérée");
+			fail(ILLEGAL_OP_EXEP);
 		} catch (Exception te) {
 			if(!(te instanceof IllegalOperationException)){
 				failExeption(te);
@@ -66,7 +68,7 @@ public class TestsBanqueManager {
 	public void testSuppressionDunCompteAvecDecouvertAvecSoldeDifferentDeZero() {
 		try {
 			bm.deleteAccount(bm.getAccountById("CADNV00000"));
-			fail("Une IllegalOperationException aurait dû être récupérée");
+			fail(ILLEGAL_OP_EXEP);
 		} catch (Exception te) {
 			if(!(te instanceof IllegalOperationException)){
 				failExeption(te);
@@ -89,7 +91,7 @@ public class TestsBanqueManager {
 	public void testSuppressionDunCompteSansDecouvertAvecSoldeDifferentDeZero() {
 		try {
 			bm.deleteAccount(bm.getAccountById("CSDNV00000"));
-			fail("Une IllegalOperationException aurait dû être récupérée");
+			fail(ILLEGAL_OP_EXEP);
 		} catch (Exception te) {
 			if(!(te instanceof IllegalOperationException)){
 				failExeption(te);
@@ -115,7 +117,7 @@ public class TestsBanqueManager {
 		bm.loadAllGestionnaires();
 		try {
 			bm.deleteUser(bm.getUserById("admin"));
-			fail("Une IllegalOperationException aurait dû être récupérée");
+			fail(ILLEGAL_OP_EXEP);
 		} catch (Exception te) {
 			if(!(te instanceof IllegalOperationException)){
 				failExeption(te);
@@ -142,7 +144,7 @@ public class TestsBanqueManager {
 	public void testSuppressionDunClientAvecUnCompteDeSoldePositif() {
 		try {
 			bm.deleteUser(bm.getUserById("j.doe1"));
-			fail("Une IllegalOperationException aurait dû être récupérée");
+			fail(ILLEGAL_OP_EXEP);
 		} catch (Exception te) {
 			if(!(te instanceof IllegalOperationException)){
 				failExeption(te);
@@ -154,7 +156,7 @@ public class TestsBanqueManager {
 	public void testSuppressionDunClientAvecUnCompteAvecDecouvertDeSoldeNegatif() {
 		try {
 			bm.deleteUser(bm.getUserById("j.doe1"));
-			fail("Une IllegalOperationException aurait dû être récupérée");
+			fail(ILLEGAL_OP_EXEP);
 		} catch (Exception te) {
 			if(!(te instanceof IllegalOperationException)){
 				failExeption(te);
