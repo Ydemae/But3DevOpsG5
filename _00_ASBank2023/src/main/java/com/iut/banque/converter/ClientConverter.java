@@ -47,6 +47,10 @@ public class ClientConverter extends StrutsTypeConverter {
 		this.dao = dao;
 	}
 
+	public void setDao(IDao dao) {
+		this.dao = dao;
+	}
+
 	/**
 	 * Constructeur sans paramêtre pour le ClientConverter
 	 */
