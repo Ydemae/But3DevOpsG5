@@ -33,7 +33,7 @@
 		<property name="packagesToScan" value="com.iut.banque.modele" />
 	</bean>
 
-	<!-- La source de donnée utilisée pour les tests. Contient les infos de 
+	<!-- La source de donnée utilisée pour les tests. Contient les infos de
 		base de la connection -->
 	<bean id="dataSource" scope="singleton"
 		class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
@@ -44,7 +44,7 @@
 		<!-- Nécessaire, sinon les test se font quand même -->
 		<property name="defaultAutoCommit" value="false" />
 	</bean>
-	
+
 	<!-- ============= Gestion des transactions ============= -->
 
 	<!-- Le gestionnaire de transaction nécessaire pour l'annotation @Transactionnal -->
@@ -52,5 +52,5 @@
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
+
 </beans>

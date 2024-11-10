@@ -99,6 +99,18 @@ public class TestsBanqueManager {
 		}
 	}
 
+	@Test
+	public void testSuppressionDunCompteInconnu() {
+		try {
+			bm.deleteAccount(bm.getAccountById("INCO00000"));
+			fail("Une NullPointerException aurait dû être récupérée");
+		} catch (Exception te) {
+			if(!(te instanceof NullPointerException)){
+				failExeption(te);
+			}
+		}
+	}
+
 	// Tests en rapport avec la suppression d'utilisateurs
 	@Test
 	public void testSuppressionDunUtilisateurSansCompte() {
@@ -159,6 +171,18 @@ public class TestsBanqueManager {
 			fail(ILLEGAL_OP_EXEP);
 		} catch (Exception te) {
 			if(!(te instanceof IllegalOperationException)){
+				failExeption(te);
+			}
+		}
+	}
+
+	@Test
+	public void testSuppressionDunClientInconnu() {
+		try {
+			bm.deleteUser(bm.getUserById("j.inconnu"));
+			fail("Une NullPointerException aurait dû être récupérée");
+		} catch (Exception te) {
+			if(!(te instanceof NullPointerException)){
 				failExeption(te);
 			}
 		}

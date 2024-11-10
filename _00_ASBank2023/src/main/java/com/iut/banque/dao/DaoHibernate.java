@@ -192,20 +192,24 @@ public class DaoHibernate implements IDao {
 	 */
 	@Override
 	public boolean isUserAllowed(String userId, String userPwd) {
-		Session session = null;
 		if (userId == null || userPwd == null) {
+			System.out.println("MDP hashed : " + userPwd);
 			return false;
 		} else {
+
+			Session session = null;
 			sessionFactory.openSession();
 			userId = userId.trim();
 			if ("".equals(userId) || "".equals(userPwd)) {
 				return false;
 			} else {
 				session = sessionFactory.getCurrentSession();
+
 				Utilisateur user = session.get(Utilisateur.class, userId);
 				if (user == null) {
 					return false;
 				}
+				System.out.println("USER : " + user.getUserPwd());
 				return (userPwd.equals(user.getUserPwd()));
 			}
 		}
