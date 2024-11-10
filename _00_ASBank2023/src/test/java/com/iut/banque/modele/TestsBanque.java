@@ -1,5 +1,6 @@
 package com.iut.banque.modele;
 
+import com.google.gwt.dom.client.DListElement;
 import com.iut.banque.exceptions.IllegalFormatException;
 import com.iut.banque.exceptions.IllegalOperationException;
 import com.iut.banque.exceptions.InsufficientFundsException;
@@ -19,6 +20,74 @@ public class TestsBanque {
     @Before
     public void setUp() {
         banque = new Banque();
+    }
+
+    //Test getters-setters
+
+    @Test
+    public void testGetSetClients() throws IllegalFormatException {
+        Map<String, Client> listeClients = new HashMap<>();
+        Client client1 = new Client();
+        Client client2 = new Client();
+
+        client1.setUserId("a.test1");
+        client1.setPrenom("Jean");
+
+        client2.setUserId("a.test2");
+        client2.setPrenom("Michael");
+
+        listeClients.put(client1.getUserId(), client1);
+        listeClients.put(client2.getUserId(), client2);
+
+        this.banque.setClients(listeClients);
+
+        Map<String, Client> retrievedListeClients = banque.getClients();
+
+        if (retrievedListeClients != listeClients) {
+            Assert.fail("La liste des clients n'a pas été set correctement.");
+        }
+    }
+
+    @Test
+    public void testGetSetGestionnaires() throws IllegalFormatException {
+        Map<String, Gestionnaire> listeGestios = new HashMap<>();
+        Gestionnaire gestionnaire1 = new Gestionnaire();
+        Gestionnaire gestionnaire2 = new Gestionnaire();
+
+        gestionnaire1.setUserId("a.test1");
+        gestionnaire1.setPrenom("Jean");
+
+        gestionnaire2.setUserId("a.test2");
+        gestionnaire2.setPrenom("Michael");
+
+        listeGestios.put(gestionnaire1.getUserId(), gestionnaire1);
+        listeGestios.put(gestionnaire2.getUserId(), gestionnaire2);
+
+        this.banque.setGestionnaires(listeGestios);
+
+        Map<String, Gestionnaire> retrievedListeGestios = banque.getGestionnaires();
+
+        if (retrievedListeGestios != listeGestios) {
+            Assert.fail("La liste des gestionnaires n'a pas été set correctement.");
+        }
+    }
+
+    @Test
+    public void testGetSetAccounts() throws IllegalFormatException, IllegalOperationException {
+        Map<String, Compte> listAccounts = new HashMap<>();
+        Compte compte1 = new CompteSansDecouvert("TE0000000000", 100.00, new Client());
+        Compte compte2 = new CompteAvecDecouvert("TE0000000001", 99.99, 10.00, new Client());
+
+        listAccounts.put(compte1.getNumeroCompte(), compte1);
+        listAccounts.put(compte2.getNumeroCompte(), compte2);
+
+        this.banque.setAccounts(listAccounts);
+
+        Map<String, Compte> retrievedListeAccounts = banque.getAccounts();
+
+        if (retrievedListeAccounts != listAccounts) {
+            Assert.fail("La liste des comptes n'a pas été set correctement.");
+        }
     }
 
     // Tests débiter

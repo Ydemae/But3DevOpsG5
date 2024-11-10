@@ -2,10 +2,45 @@ package com.iut.banque.modele;
 
 import static org.junit.Assert.fail;
 
+import com.iut.banque.exceptions.IllegalFormatException;
+import org.junit.Assert;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class TestsClient {
+
+	//Tests getters-setters
+
+	@Test
+	public void testGetSetAccounts() throws IllegalArgumentException, IllegalFormatException {
+		Client client = new Client();
+
+		Map<String, Compte> accounts = new HashMap<>();
+		accounts.put("XE0000000000", new CompteSansDecouvert("XE0000000000", 100.00, client));
+
+		client.setAccounts(accounts);
+
+		if (client.getAccounts() != accounts){
+			Assert.fail("SetAccounts n'a pas set la liste des comptes correctement");
+		}
+	}
+
+	@Test
+	public void testGetIdentity() throws IllegalFormatException {
+		Client c = new Client("John", "Doe", "20 rue Bouvier", true, "j.doe1", "password",null, "1234567890");
+
+		Assert.assertEquals("Doe John (1234567890)", c.getIdentity());
+	}
+
+	@Test
+	public void testToString() throws IllegalFormatException {
+		Client c = new Client("John", "Doe", "20 rue Bouvier", true, "j.doe1", "password",null, "1234567890");
+
+		Assert.assertEquals("Client [userId=j.doe1, nom=John, prenom=Doe, adresse=20 rue Bouvier, male=true, userPwd=password, numeroClient=1234567890, accounts=0]", c.toString());
+	}
 
 	/**
 	 * Tests successifs de la méthode de vérification du format de numéro de
