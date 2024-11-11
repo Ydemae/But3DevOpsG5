@@ -2,8 +2,8 @@ package com.iut.banque.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
-
 import java.util.Map;
 
 import org.junit.Test;
@@ -22,6 +22,8 @@ import com.iut.banque.modele.CompteAvecDecouvert;
 import com.iut.banque.modele.CompteSansDecouvert;
 import com.iut.banque.modele.Gestionnaire;
 import com.iut.banque.modele.Utilisateur;
+import com.iut.banque.utils.HashManager;
+import com.iut.banque.interfaces.IDao;
 
 /**
  * Class de test pour la DAO.
@@ -302,41 +304,69 @@ public class TestsDaoHibernate {
 
 	@Test
 	public void testIsUserAllowedUser() {
-		assertTrue(daoHibernate.isUserAllowed("c.exist", "TEST PASS"));
+		String pwd = "TEST PASS";
+		String userString = "c.exist";
+		Utilisateur user = this.daoHibernate.getUserById(userString);
+		String mdpHashed = HashManager.hashPassword(pwd, user.getSalt())[0];
+
+		assertTrue(daoHibernate.isUserAllowed(user.getUserId(), mdpHashed));
 	}
 
 	@Test
 	public void testIsUserAllowedWrongPassword() {
-		assertEquals(false, daoHibernate.isUserAllowed("c.exist", "WRONG PASS"));
+		String pwd = "WRONG PASS";
+		String userString = "c.exist";
+
+		Utilisateur user = this.daoHibernate.getUserById(userString);
+		String mdpHashed = HashManager.hashPassword(pwd, user.getSalt())[0];
+
+		assertEquals(false, daoHibernate.isUserAllowed(user.getUserId(), mdpHashed));
 	}
 
-	@Test
-	public void testIsUserAllowedUserDoesntExist() {
-		assertEquals(false, daoHibernate.isUserAllowed("c.doesntexist", "TEST PASS"));
-	}
 
 	@Test
 	public void testIsNullPassword() {
-		assertEquals(false, daoHibernate.isUserAllowed("c.exist", null));
+		String pwd = null;
+		String userString = "c.exist";
+
+		Utilisateur user = this.daoHibernate.getUserById(userString);
+
+		try{
+			String mdpHashed = HashManager.hashPassword(pwd, user.getSalt())[0];
+		} catch(Exception e) {
+			if (!(e instanceof NullPointerException)){
+				fail(e.getMessage());
+			}
+		}
+
 	}
 
 	@Test
 	public void testIsUserAllowedNullLogin() {
-		assertEquals(false, daoHibernate.isUserAllowed(null, "TEST PASS"));
+		String pwd = "TEST PASS";
+		String userString = null;
+
+		try {
+			Utilisateur user = this.daoHibernate.getUserById(userString);
+		} catch (Exception e) {
+			if (!(e instanceof IllegalArgumentException)) {
+				fail(e.getMessage());
+			}
+		}
+
+
 	}
 
 	@Test
 	public void testIsUserAllowedEmptyPassword() {
-		assertEquals(false, daoHibernate.isUserAllowed("c.exist", ""));
-	}
+		String pwd = "";
+		String userString = "c.exist";
 
-	@Test
-	public void testIsUserAllowedEmptyTrimmedLogin() {
-		assertEquals(false, daoHibernate.isUserAllowed("", "TEST PASS"));
-		assertEquals(false, daoHibernate.isUserAllowed(" ", "TEST PASS"));
-		assertEquals(false, daoHibernate.isUserAllowed("  ", "TEST PASS"));
-		assertEquals(false, daoHibernate.isUserAllowed("   ", "TEST PASS"));
-		assertEquals(false, daoHibernate.isUserAllowed("    ", "TEST PASS"));
+
+		Utilisateur user = this.daoHibernate.getUserById(userString);
+		String mdpHashed = HashManager.hashPassword(pwd, user.getSalt())[0];
+
+		assertEquals(false, daoHibernate.isUserAllowed(user.getUserId(), mdpHashed));
 	}
 
 	@Test

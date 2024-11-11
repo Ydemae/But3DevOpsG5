@@ -73,16 +73,29 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
 -- Dumping data for table `Utilisateur`
 --
 
-INSERT INTO `Utilisateur` (`userId`, `nom`, `prenom`, `adresse`, `userPwd`, `male`, `type`, `numClient`) VALUES
-('a.lidell1', 'Lidell', 'Alice', '789, grande rue, Metz', 'toto', b'1', 'CLIENT', '9865432100'),
-('admin', 'Smith', 'Joe', '123, grande rue, Metz', 'adminpass', b'1', 'MANAGER', ''),
-('c.exist', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'TEST PASS', b'1', 'CLIENT', '0101010101'),
-('g.descomptes', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'TEST PASS', b'1', 'CLIENT', '1000000001'),
-('g.descomptesvides', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'TEST PASS', b'1', 'CLIENT', '0000000002'),
-('g.exist', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'TEST PASS', b'1', 'CLIENT', '1010101010'),
-('g.pasdecompte', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'TEST PASS', b'1', 'CLIENT', '5544554455'),
-('j.doe1', 'Doe', 'Jane', '456, grand boulevard, Brest', 'toto', b'1', 'CLIENT', '1234567890'),
-('j.doe2', 'Doe', 'John', '457, grand boulevard, Perpignan', 'toto', b'1', 'CLIENT', '0000000001');
+-- INSERT INTO `Utilisateur` (`userId`, `nom`, `prenom`, `adresse`, `userPwd`, `male`, `type`, `numClient`) VALUES
+-- ('a.lidell1', 'Lidell', 'Alice', '789, grande rue, Metz', 'toto', b'1', 'CLIENT', '9865432100'),
+-- ('admin', 'Smith', 'Joe', '123, grande rue, Metz', 'adminpass', b'1', 'MANAGER', ''),
+-- ('c.exist', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'TEST PASS', b'1', 'CLIENT', '0101010101'),
+-- ('g.descomptes', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'TEST PASS', b'1', 'CLIENT', '1000000001'),
+-- ('g.descomptesvides', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'TEST PASS', b'1', 'CLIENT', '0000000002'),
+-- ('g.exist', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'TEST PASS', b'1', 'CLIENT', '1010101010'),
+-- ('g.pasdecompte', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'TEST PASS', b'1', 'CLIENT', '5544554455'),
+-- ('j.doe1', 'Doe', 'Jane', '456, grand boulevard, Brest', 'toto', b'1', 'CLIENT', '1234567890'),
+-- ('j.doe2', 'Doe', 'John', '457, grand boulevard, Perpignan', 'toto', b'1', 'CLIENT', '0000000001');
+
+
+
+INSERT INTO `Utilisateur` (`userId`, `nom`, `prenom`, `adresse`, `userPwd`, `male`, `type`, `numClient`, `salt`) VALUES
+('a.lidell1', 'Lidell', 'Alice', '789, grande rue, Metz', 'tRwLe/7g9SnAYbwO0x4PoZ6iwvtwjunOtdLDDGb02qjZUjENE90jsDKmELS/pKlZKUUXXyaxvrLF3si78/dllw==', b'1', 'CLIENT', '9865432100', 'uZ/bt4VbpPHXSc2k/RCnqQ=='),
+('admin', 'Smith', 'Joe', '123, grande rue, Metz', '93Me83zkrLo4jYAMZkCF93aNH72obc7//IauE9oJZqtsj2GW8hZQzQ1Toc+osFqlKJK5Ck1LT1z2uaGhJo6/1g==', b'1', 'MANAGER', '', 'C/Qpw+ukU8MLvniCMWIBmA=='),
+('c.exist', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'MmtbGX2Uh7XHOqt6fN7GPD/9jA1Dx00uHuJ/AgR8edQSX0dTg0NXRLYwrjsTF5GVOMRtTDtrZ2l0UqcC12b6lA==', b'1', 'CLIENT', '0101010101', 'KxgxWGQB1wPoeQL9DunapQ=='),
+('g.descomptes', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'MmtbGX2Uh7XHOqt6fN7GPD/9jA1Dx00uHuJ/AgR8edQSX0dTg0NXRLYwrjsTF5GVOMRtTDtrZ2l0UqcC12b6lA==', b'1', 'CLIENT', '1000000001', 'KxgxWGQB1wPoeQL9DunapQ=='),
+('g.descomptesvides', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'MmtbGX2Uh7XHOqt6fN7GPD/9jA1Dx00uHuJ/AgR8edQSX0dTg0NXRLYwrjsTF5GVOMRtTDtrZ2l0UqcC12b6lA==', b'1', 'CLIENT', '0000000002', 'KxgxWGQB1wPoeQL9DunapQ=='),
+('g.exist', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'MmtbGX2Uh7XHOqt6fN7GPD/9jA1Dx00uHuJ/AgR8edQSX0dTg0NXRLYwrjsTF5GVOMRtTDtrZ2l0UqcC12b6lA==', b'1', 'CLIENT', '1010101010', 'KxgxWGQB1wPoeQL9DunapQ=='),
+('g.pasdecompte', 'TEST NOM', 'TEST PRENOM', 'TEST ADRESSE', 'MmtbGX2Uh7XHOqt6fN7GPD/9jA1Dx00uHuJ/AgR8edQSX0dTg0NXRLYwrjsTF5GVOMRtTDtrZ2l0UqcC12b6lA==', b'1', 'CLIENT', '5544554455', 'KxgxWGQB1wPoeQL9DunapQ=='),
+('j.doe1', 'Doe', 'Jane', '456, grand boulevard, Brest', 'yBFkbNS3DgyBnH4jEOVmrDUrn6yvI9kMC7ggHnwtkJK+VlqWmfUx1G3AvisWyKxCJDibCR52Y2f+u0XSEMy80g==', b'1', 'CLIENT', '1234567890', '0AWCe5D+52Hp96eohcOgFg=='),
+('j.doe2', 'Doe', 'John', '457, grand boulevard, Perpignan', 'yBFkbNS3DgyBnH4jEOVmrDUrn6yvI9kMC7ggHnwtkJK+VlqWmfUx1G3AvisWyKxCJDibCR52Y2f+u0XSEMy80g==', b'1', 'CLIENT', '0000000001', '0AWCe5D+52Hp96eohcOgFg==');
 
 --
 -- Constraints for dumped tables

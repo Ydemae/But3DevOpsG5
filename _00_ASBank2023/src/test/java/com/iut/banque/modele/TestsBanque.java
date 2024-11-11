@@ -1,9 +1,11 @@
 package com.iut.banque.modele;
 
+import com.google.gwt.dom.client.DListElement;
 import com.iut.banque.exceptions.IllegalFormatException;
 import com.iut.banque.exceptions.IllegalOperationException;
 import com.iut.banque.exceptions.InsufficientFundsException;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -11,87 +13,142 @@ import java.util.Map;
 
 public class TestsBanque {
 
-    Banque banque;
+    private Banque banque;
 
-    //Tests débiter
+    private static final String NUMERO_COMPTE_SANS_DECOUVERT = "WU1234567890";
+
+    @Before
+    public void setUp() {
+        banque = new Banque();
+    }
+
+    //Test getters-setters
+
+    @Test
+    public void testGetSetClients() throws IllegalFormatException {
+        Map<String, Client> listeClients = new HashMap<>();
+        Client client1 = new Client();
+        Client client2 = new Client();
+
+        client1.setUserId("a.test1");
+        client1.setPrenom("Jean");
+
+        client2.setUserId("a.test2");
+        client2.setPrenom("Michael");
+
+        listeClients.put(client1.getUserId(), client1);
+        listeClients.put(client2.getUserId(), client2);
+
+        this.banque.setClients(listeClients);
+
+        Map<String, Client> retrievedListeClients = banque.getClients();
+
+        if (retrievedListeClients != listeClients) {
+            Assert.fail("La liste des clients n'a pas été set correctement.");
+        }
+    }
+
+    @Test
+    public void testGetSetGestionnaires() throws IllegalFormatException {
+        Map<String, Gestionnaire> listeGestios = new HashMap<>();
+        Gestionnaire gestionnaire1 = new Gestionnaire();
+        Gestionnaire gestionnaire2 = new Gestionnaire();
+
+        gestionnaire1.setUserId("a.test1");
+        gestionnaire1.setPrenom("Jean");
+
+        gestionnaire2.setUserId("a.test2");
+        gestionnaire2.setPrenom("Michael");
+
+        listeGestios.put(gestionnaire1.getUserId(), gestionnaire1);
+        listeGestios.put(gestionnaire2.getUserId(), gestionnaire2);
+
+        this.banque.setGestionnaires(listeGestios);
+
+        Map<String, Gestionnaire> retrievedListeGestios = banque.getGestionnaires();
+
+        if (retrievedListeGestios != listeGestios) {
+            Assert.fail("La liste des gestionnaires n'a pas été set correctement.");
+        }
+    }
+
+    @Test
+    public void testGetSetAccounts() throws IllegalFormatException, IllegalOperationException {
+        Map<String, Compte> listAccounts = new HashMap<>();
+        Compte compte1 = new CompteSansDecouvert("TE0000000000", 100.00, new Client());
+        Compte compte2 = new CompteAvecDecouvert("TE0000000001", 99.99, 10.00, new Client());
+
+        listAccounts.put(compte1.getNumeroCompte(), compte1);
+        listAccounts.put(compte2.getNumeroCompte(), compte2);
+
+        this.banque.setAccounts(listAccounts);
+
+        Map<String, Compte> retrievedListeAccounts = banque.getAccounts();
+
+        if (retrievedListeAccounts != listAccounts) {
+            Assert.fail("La liste des comptes n'a pas été set correctement.");
+        }
+    }
+
+    // Tests débiter
 
     @Test
     public void testDebiterCasSimple() throws IllegalFormatException {
-        banque = new Banque();
-
-        Compte testCompte = new CompteSansDecouvert("WU1234567890", 50, new Client());
-        try{
+        Compte testCompte = new CompteSansDecouvert(NUMERO_COMPTE_SANS_DECOUVERT, 50, new Client());
+        try {
             banque.debiter(testCompte, 30);
-        }
-        catch (InsufficientFundsException e){
+        } catch (InsufficientFundsException e) {
             Assert.fail("L'exception InsufficientFundsException a été lancée alors que le compte possédait plus de solde que le montant débité");
         }
 
-        if (testCompte.getSolde() != 20){
-            Assert.fail("Le compte n'a pas été débité correctement");
-        }
+        Assert.assertEquals("Le compte n'a pas été débité correctement", 20, testCompte.getSolde(), 0);
     }
 
     @Test
     public void testDebiterCompteSansDecouvertSolde0() throws IllegalFormatException {
-        banque = new Banque();
-
-        Compte testCompte = new CompteSansDecouvert("WU1234567890", 0, new Client());
+        Compte testCompte = new CompteSansDecouvert(NUMERO_COMPTE_SANS_DECOUVERT, 0, new Client());
 
         try {
             banque.debiter(testCompte, 100);
             Assert.fail("Un compte sans découvert est passé en découvert");
+        } catch (InsufficientFundsException e) {
+            // Expected exception
         }
-        catch (InsufficientFundsException e){
-            return;
-        }
-
     }
 
     @Test
     public void testDebiterCompteAvecDecouvertSolde0() throws IllegalOperationException, IllegalFormatException {
-        banque = new Banque();
-
-        Compte testCompte = new CompteAvecDecouvert("WU1234567890", 0, 100, new Client());
+        Compte testCompte = new CompteAvecDecouvert(NUMERO_COMPTE_SANS_DECOUVERT, 0, 100, new Client());
 
         try {
             banque.debiter(testCompte, 100);
-        }
-        catch (InsufficientFundsException e){
+        } catch (InsufficientFundsException e) {
             Assert.fail("Un compte a renvoyé une exception InsufficientFundsException alors que le découvert n'a pas été dépassé");
         }
 
-        if (testCompte.getSolde() !=  -100){
-            Assert.fail("Le compte n'a pas été débité correctement");
-        }
+        Assert.assertEquals("Le compte n'a pas été débité correctement", -100, testCompte.getSolde(), 0);
     }
 
-    //Tests créditer
+    // Tests créditer
 
     @Test
     public void testCrediterCompte() throws IllegalFormatException {
-        banque = new Banque();
-
-        Compte testCompte = new CompteSansDecouvert("WU1234567890", 0, new Client());
+        Compte testCompte = new CompteSansDecouvert(NUMERO_COMPTE_SANS_DECOUVERT, 0, new Client());
 
         banque.crediter(testCompte, 100);
 
-
-        if (testCompte.getSolde() !=  100){
-            Assert.fail("Le compte n'a pas été crédité correctement");
-        }
+        Assert.assertEquals("Le compte n'a pas été crédité correctement", 100, testCompte.getSolde(), 0);
     }
 
-    //Tests deleteUser
+    // Tests deleteUser
 
     @Test
     public void testDeleteUser() {
-        banque = new Banque();
-        Map<String, Client> listeClients = new HashMap<String, Client>();
-
-        if (banque.getClients() != null){
-            Assert.fail("La liste des clients de la Banque est initialisée à la création d'une nouvelle banque");
-        }
+        Map<String, Client> listeClients = new HashMap<>();
+        final String TEST1_T = "t.test";
+        final String TEST2_T = "t.test2";
+        final String TEST3_T = "t.test3";
+        Assert.assertNull("La liste des clients de la Banque est initialisée à la création d'une nouvelle banque", banque.getClients());
 
         Client testClient = new Client();
         testClient.setNom("Fransisco Testeur");
@@ -102,46 +159,35 @@ public class TestsBanque {
         Client testClient3 = new Client();
         testClient3.setNom("Francis Testeur");
 
-        listeClients.put("t.test", testClient);
-        listeClients.put("t.test2", testClient2);
-        listeClients.put("t.test3", testClient3);
+        listeClients.put(TEST1_T, testClient);
+        listeClients.put(TEST2_T , testClient2);
+        listeClients.put(TEST3_T, testClient3);
 
         banque.setClients(listeClients);
 
         Map<String, Client> returnedListeClients = banque.getClients();
 
-        Assert.assertNotNull(returnedListeClients);
+        Assert.assertNotNull("La liste des clients de la Banque est vide après l'initialisation", returnedListeClients);
+        Assert.assertEquals("La taille de la liste des clients est incorrecte", listeClients.size(), returnedListeClients.size());
+        Assert.assertEquals("Le client renvoyé n'est pas égal au client passé à la banque", testClient, returnedListeClients.get(TEST1_T));
 
-        if (returnedListeClients.size() != listeClients.size()){
-            Assert.fail("La taille de la liste des clients est incorrecte");
-        }
-        if (returnedListeClients.get("t.test") != testClient){
-            Assert.fail("Le client renvoyé n'est pas égal au client passé à la banque");
-        }
-
-        banque.deleteUser("t.test2");
+        banque.deleteUser(TEST2_T);
         returnedListeClients = banque.getClients();
 
-        if (returnedListeClients.get("t.test2") != null){
-            Assert.fail("La suppression du client de la banque n'a pas été effectué");
-        }
-
+        Assert.assertNull("La suppression du client de la banque n'a pas été effectuée", returnedListeClients.get(TEST2_T));
     }
 
-    //Tests changeDecouvert
+    // Tests changeDecouvert
 
     @Test
     public void testChangeDecouvert() throws IllegalOperationException, IllegalFormatException {
-        banque = new Banque();
-
-        CompteAvecDecouvert testCompte = new CompteAvecDecouvert("WU1234567890", 0, 1, new Client());
+        CompteAvecDecouvert testCompte = new CompteAvecDecouvert(NUMERO_COMPTE_SANS_DECOUVERT, 0, 1, new Client());
         banque.changeDecouvert(testCompte, 100);
+
         try {
             banque.debiter(testCompte, 100);
-        }
-        catch (InsufficientFundsException e){
+        } catch (InsufficientFundsException e) {
             Assert.fail("Le changement du découvert ne s'est pas effectué");
         }
     }
-
 }
