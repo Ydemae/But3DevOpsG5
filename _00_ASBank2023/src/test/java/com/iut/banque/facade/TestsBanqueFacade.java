@@ -12,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.iut.banque.constants.LoginConstants;
 import static org.junit.Assert.assertEquals;
 
-import com.iut.banque.exceptions.IllegalOperationException;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:TestsBanqueManager-context.xml")
 @Transactional("transactionManager")
@@ -57,14 +55,13 @@ public class TestsBanqueFacade {
     @Test
     public void testLoginUserWrongPassword() {
             int result = bf.tryLogin("a.lidell1", "mama");
-            assertEquals(result, LoginConstants.LOGIN_FAILED);
+            assertEquals(LoginConstants.LOGIN_FAILED, result);
     }
 
     @Test
     public void testLoginUserWrongUserId() {
         try {
             int result = bf.tryLogin("a.aldi9", "toto");
-            System.out.println("TryTryTryTryTryTryTryTryTryTryTryTryTryTry" + result + "   " + LoginConstants.LOGIN_FAILED);
             if (result != LoginConstants.LOGIN_FAILED) {
                 fail("Aucun user ne devrait être connecté");
             }
@@ -80,7 +77,6 @@ public class TestsBanqueFacade {
     public void testLoginUserEmptyUserId() {
         try{
             int result = bf.tryLogin("", "toto");
-            System.out.println("TryTryTryTryTryTryTryTryTryTryTryTryTryTry" + result + "   " + LoginConstants.LOGIN_FAILED);
             if (result != LoginConstants.LOGIN_FAILED) {
                 fail("Aucun user ne devrait être connecté");
             }
@@ -94,7 +90,6 @@ public class TestsBanqueFacade {
     @Test
     public void testLoginUserEmptyPassword() {
             int result = bf.tryLogin("a.lidell1", "");
-            System.out.println("TryTryTryTryTryTryTryTryTryTryTryTryTryTry" + result + "   " + LoginConstants.LOGIN_FAILED);
             if (result != LoginConstants.LOGIN_FAILED) {
                 fail("Aucun user ne devrait être connecté");
             }

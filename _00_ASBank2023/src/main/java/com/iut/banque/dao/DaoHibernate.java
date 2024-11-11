@@ -193,7 +193,6 @@ public class DaoHibernate implements IDao {
 	@Override
 	public boolean isUserAllowed(String userId, String userPwd) {
 		if (userId == null || userPwd == null) {
-			System.out.println("MDP hashed : " + userPwd);
 			return false;
 		} else {
 
@@ -209,7 +208,6 @@ public class DaoHibernate implements IDao {
 				if (user == null) {
 					return false;
 				}
-				System.out.println("USER : " + user.getUserPwd());
 				return (userPwd.equals(user.getUserPwd()));
 			}
 		}
