@@ -42,6 +42,11 @@ public class LoginManager {
 		//Hashing password
 		Utilisateur user = dao.getUserById(userCde);
 
+		//Added to avoid NULL POINTER EXCEPTION when userCode is invalid
+		if (user == null){
+			return LoginConstants.LOGIN_FAILED;
+		}
+
 		userPwd = HashManager.hashPassword(userPwd, user.getSalt())[0];
 		//Verifying user access
 		if (dao.isUserAllowed(userCde, userPwd)) {

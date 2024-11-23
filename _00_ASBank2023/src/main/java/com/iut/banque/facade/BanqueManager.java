@@ -126,8 +126,8 @@ public class BanqueManager {
 	 * 
 	 * @return la liste de tous les clients
 	 */
-	public Map<String, Client> getAllManagers() {
-		return bank.getClients();
+	public Map<String, Gestionnaire> getAllManagers() {
+		return bank.getGestionnaires();
 	}
 
 	/**
