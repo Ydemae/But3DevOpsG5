@@ -40,11 +40,11 @@
 	<s:else>
 		<p>Voici l'état des comptes de la banque :</p>
 	</s:else>
-	<table>
+	<table aria-describedby="table de listeCompteManager">
 		<s:iterator value="allClients">
 			<s:if test="(value.possedeComptesADecouvert() || !aDecouvert)">
 				<tr>
-					<th colspan="3">Client : <s:property
+					<th scope="col" colspan="3">Client : <s:property
 							value="value.prenom" /> <s:property value="value.nom" /> (n°<s:property
 							value="value.numeroClient" />)</th>
 
