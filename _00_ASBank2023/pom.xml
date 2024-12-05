@@ -12,6 +12,11 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<properties>
+		<sonar.organization>g5but3devops</sonar.organization>
+		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
+	</properties>
+
 	<build>
 		<resources>
 			<resource>
@@ -25,7 +30,7 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.11.0</version>
+				<version>3.3.2</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
