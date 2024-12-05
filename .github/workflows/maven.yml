@@ -17,9 +17,8 @@ on:
 jobs:
 
   build:
-    working-directory: ./_00_ASBank2023
     runs-on: ubuntu-latest
-
+    working-directory: ./_00_ASBank2023
     steps:
     - uses: actions/checkout@v4
     - name: Set up JDK 17
