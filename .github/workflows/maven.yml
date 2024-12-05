@@ -28,7 +28,7 @@ jobs:
         cache: maven
 
     - name: Install OpenVPN
-        run: sudo apt-get install -y openvpn
+      run: sudo apt-get install -y openvpn
 
     - name: Configure OpenVPN
       run: |
