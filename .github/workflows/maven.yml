@@ -15,8 +15,9 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
 
+  build:
+    working-directory: ./_00_ASBank2023
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +29,6 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      working-directory: ./_00_ASBank2023
       run: mvn -B package -DskipTests --file pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
