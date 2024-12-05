@@ -27,8 +27,7 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-      working-directory: ./_00_ASBank2023
-      run: mvn -B package --file pom.xml -DskipTests
+      run: mvn -B package --file _00_ASBank2023/pom.xml
 
     # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
