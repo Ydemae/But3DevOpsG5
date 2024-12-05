@@ -16,16 +16,6 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
-
-  phpmyadmin:
-    container_name: asbank_phpmyadmin
-    image: ${PhpMyAdmin_Image}
-    restart: always
-    ports:
-      - "${PhpMyAdmin_Port_Host}:${PhpMyAdmin_Port}"
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: ${SQL_Password}
   
   maven-builder:
     container_name: asbank_maven
@@ -48,7 +38,7 @@ services:
       context: .
       dockerfile: Docker/Dockerfile.tomcat
     ports:
-      - "8081:8081"
+      - "8080:8080"
     depends_on:
       - db
 
