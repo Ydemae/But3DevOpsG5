@@ -26,10 +26,15 @@ jobs:
         sudo apt install mysql-server-8.0
 
 
-    - name: check SGBD running
+    - name: Start mysql server
       run: |
         sudo systemctl start mysql
         sudo service mysql status
+
+    - name: Set root password
+      run: |
+        mysql -u root
+        SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${{ DATABASE_ROOT_PASSWORD }}');
 
     - uses: actions/checkout@v4
     - name: Set up JDK 11
