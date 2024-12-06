@@ -24,12 +24,11 @@ jobs:
       run: |
         sudo apt update
         sudo apt install mysql-server-8.0
-        sudo mysql_secure_installation
 
 
     - name: check SGBD running
       run: |
-        mysql -u root -p
+        sudo service mysql status
 
     - uses: actions/checkout@v4
     - name: Set up JDK 11
