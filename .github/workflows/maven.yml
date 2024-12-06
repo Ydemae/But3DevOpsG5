@@ -28,6 +28,7 @@ jobs:
 
     - name: check SGBD running
       run: |
+        sudo systemctl start mysql
         sudo service mysql status
 
     - uses: actions/checkout@v4
