@@ -1,0 +1,48 @@
+# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Java CI with Maven
+
+on:
+  push:
+    branches: [ "Arthur" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+    runs-on: mysql:8.0
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
+      with:
+        java-version: '11'
+        distribution: 'temurin'
+        cache: maven
+
+    - name: Install OpenVPN
+      run: sudo apt-get install -y openvpn
+
+    - name: Configure OpenVPN
+      run: |
+            sudo apt update
+            echo "${{ secrets.VPN_CONFIG }}" > vpn-config.ovpn
+            echo "${{ secrets.VPN_USERNAME }}" > vpn-credentials.txt
+            echo "${{ secrets.VPN_PASSWORD }}" >> vpn-credentials.txt
+            sudo openvpn --config vpn-config.ovpn --auth-user-pass vpn-credentials.txt --daemon
+
+    - name: Sleep for VPN connection establishment
+      run: sleep 10
+
+    - name: Verify VPN connection
+      run: sudo cat /tmp/openvpn.log
+
+    - name: Build with Maven
+      run: mvn -B package --file _00_ASBank2023/pom.xml -DskipTests
