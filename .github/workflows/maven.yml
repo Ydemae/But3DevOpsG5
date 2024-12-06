@@ -25,16 +25,18 @@ jobs:
         sudo apt update
         sudo apt install mysql-server-8.0
 
+    - name: Set root password and database tables
+      run: |
+        sudo mysqld_safe --skip-grant-tables
+        SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${{ secrets.DATABASE_ROOT_PASSWORD }}');
+        exit
+        sudo service mysql stop
+
 
     - name: Start mysql server
       run: |
         sudo systemctl start mysql
         sudo service mysql status
-
-    - name: Set root password
-      run: |
-        sudo mysqld_safe --skip-grant-tables
-        SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${{ secrets.DATABASE_ROOT_PASSWORD }}');
 
     - uses: actions/checkout@v4
     - name: Set up JDK 11
