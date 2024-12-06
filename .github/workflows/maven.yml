@@ -23,7 +23,9 @@ jobs:
     - name: Install SGBD
       run: |
         sudo apt update
-        sudo apt install mysql-server-8.0 
+        sudo apt install mysql-server-8.0
+        sudo mysql_secure_installation
+
 
     - name: check SGBD running
       run: |
