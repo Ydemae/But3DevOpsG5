@@ -33,7 +33,7 @@ jobs:
 
     - name: Set root password
       run: |
-        mysql -u root
+        sudo mysqld_safe --skip-grant-tables
         SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${{ secrets.DATABASE_ROOT_PASSWORD }}');
 
     - uses: actions/checkout@v4
