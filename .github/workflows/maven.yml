@@ -27,8 +27,5 @@ jobs:
         distribution: 'temurin'
         cache: maven
 
-    - name: Verify VPN connection
-      run: sudo cat /tmp/openvpn.log
-
     - name: Build with Maven
       run: mvn -B package --file _00_ASBank2023/pom.xml -DskipTests
