@@ -15,7 +15,7 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${SQL_Password}"]
       interval: 10s
       timeout: 5s
-      retries: 3
+      retries: 5
   
   maven-builder:
     container_name: asbank_maven
@@ -28,7 +28,9 @@ services:
       - tomcat_data:/app/target/_00_ASBank2023-0.0.1-SNAPSHOT
       - ./target:/app/target
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+      
 
   tomcat:
     container_name: asbank_tomcat
