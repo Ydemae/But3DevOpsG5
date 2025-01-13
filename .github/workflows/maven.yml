@@ -29,10 +29,10 @@ jobs:
       run: |
         sudo mkdir -p /var/run/mysqld
         sudo chown mysql:mysql /var/run/mysqld
-        sleep 2
 
     - name: Set root password and database tables
       run: |
+        sleep 2
         sudo systemctl stop mysql
 
         sudo mysqld_safe --skip-grant-tables & sleep 5
