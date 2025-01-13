@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: Install SGBD
+    - name: Install DBSM
       run: |
         sudo apt update
         sudo apt install mysql-server-8.0
