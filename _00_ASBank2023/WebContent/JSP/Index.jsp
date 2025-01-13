@@ -12,10 +12,9 @@
 <link rel="stylesheet" href="/_00_ASBank2023/style/style.css" />
 
 <!-- Correction favicon -- BUG_Non_bloquant_Nr_1  -->
-<link href="/_00_ASBank2023/style/favicon.png" rel="icon" type="image/png" />
-<!-- Ancien code -- BUG_Non_bloquant_Nr_1  
- 	<link href="/_00_ASBank2023/style/favicon.ico" rel="icon"
--->
+<link href="/_00_ASBank2023/style/favicon.ico" rel="icon"/>
+
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Application IUT Bank</title>
