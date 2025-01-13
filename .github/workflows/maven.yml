@@ -25,6 +25,11 @@ jobs:
         sudo apt update
         sudo apt install mysql-server-8.0
 
+    - name: Create MySQL Socket Directory
+      run: |
+        sudo mkdir -p /var/run/mysqld
+        sudo chown mysql:mysql /var/run/mysqld
+
     - name: Set root password and database tables
       run: |
         sudo systemctl stop mysql
