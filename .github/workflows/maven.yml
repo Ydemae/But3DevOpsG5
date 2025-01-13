@@ -27,19 +27,13 @@ jobs:
 
     - name: Set root password and database tables
       run: |
-        sudo mkdir -p /var/run/mysqld
-        sudo chown mysql:mysql /var/run/mysqld
-
-        sudo mysqld_safe --skip-grant-tables
-        SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${{ secrets.DATABASE_ROOT_PASSWORD }}');
-        exit
-        sudo service mysql stop
+        sudo systemctl start mysql
+        sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${{ secrets.DATABASE_ROOT_PASSWORD }}';"
 
 
     - name: Start mysql server
       run: |
-        sudo systemctl start mysql
-        sudo service mysql status
+        sudo systemctl is-active --quiet mysql || exit 1
 
     - uses: actions/checkout@v4
     - name: Set up JDK 11
@@ -50,4 +44,5 @@ jobs:
         cache: maven
 
     - name: Build with Maven
-      run: mvn -B package --file _00_ASBank2023/pom.xml -DskipTests
+      working-directory: _00_ASBank2023
+      run: mvn -B package -DskipTests
