@@ -44,11 +44,10 @@ jobs:
     - name: Start mysql server
       run: |
         sudo systemctl start mysql
-        sudo systemctl is-active --quiet mysql || exit 1
 
     - name: Verify MySQL
       run: |
-        sudo mysql -u root -p${{ secrets.DATABASE_ROOT_PASSWORD }} -e "SELECT VERSION();"
+        sudo mysql -u root -p "${{ secrets.DATABASE_ROOT_PASSWORD }}" -e "SELECT VERSION();"
 
     - uses: actions/checkout@v4
     - name: Set up JDK 11
