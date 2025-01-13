@@ -27,15 +27,23 @@ jobs:
 
     - name: Set root password and database tables
       run: |
-        sudo systemctl start mysql
+        sudo systemctl stop mysql
+
+        sudo systemctl start mysql --skip-grant-tables & sleep 5
         sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '${{ secrets.DATABASE_ROOT_PASSWORD }}';"
         sudo mysql -e "FLUSH PRIVILEGES;"
-        sudo systemctl restart mysql
+        sudo killall mysqld
+        sleep 5
 
 
     - name: Start mysql server
       run: |
+        sudo systemctl start mysql
         sudo systemctl is-active --quiet mysql || exit 1
+
+    - name: Verify MySQL
+      run: |
+        sudo mysql -u root -p${{ secrets.DATABASE_ROOT_PASSWORD }} -e "SELECT VERSION();"
 
     - uses: actions/checkout@v4
     - name: Set up JDK 11
