@@ -14,6 +14,7 @@ import com.iut.banque.exceptions.TechnicalException;
 import com.iut.banque.facade.BanqueFacade;
 import com.iut.banque.modele.Client;
 import com.iut.banque.modele.Compte;
+import com.iut.banque.modele.Gestionnaire;
 
 public class ListeCompteManager extends ActionSupport {
 
@@ -25,6 +26,26 @@ public class ListeCompteManager extends ActionSupport {
 	private transient Client client;
 	private String userInfo;
 	private String compteInfo;
+
+	/* -- Correction Sécurisation Gestionnaire -- BUG_Bloquant_Nr_1  -- */
+	@Override
+	public String execute() {
+        if (ServletActionContext.getRequest().getSession(false) == null) {
+            addActionError("Vous devez être connecté pour accéder à cette page.");
+            return LOGIN; 
+        }
+
+        Object connectedUser = ServletActionContext.getRequest().getSession().getAttribute("connectedUser");
+        if (connectedUser instanceof Gestionnaire) {
+            addActionError("Accès non autorisé. Seuls les gestionnaires peuvent accéder à cette page.");
+            return LOGIN;
+        }
+
+        return SUCCESS;
+    }	
+	/* -- Fin Correction Sécurisation Gestionnaire -- BUG_Bloquant_Nr_1  -- */
+
+
 
 	/**
 	 * Constructeur de la classe Connect

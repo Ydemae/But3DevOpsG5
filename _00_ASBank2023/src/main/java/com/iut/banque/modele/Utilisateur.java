@@ -9,8 +9,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import com.iut.banque.exceptions.IllegalFormatException;
-
 /**
  * Classe représentant un utilisateur quelconque.
  * 
@@ -143,14 +141,16 @@ public abstract class Utilisateur {
 		return userId;
 	}
 
+	/* -- Correction Formulaire Création Utilisateur Bug-Non Bloquant N3  */
 	/**
 	 * @param userId
 	 *            : l'identifiant de l'utilisateur
-	 * @throws IllegalFormatException
+	 * @throws IllegalArgumentException
 	 */
-	public void setUserId(String userId) throws IllegalFormatException {
+	public void setUserId(String userId) throws IllegalArgumentException {
 		this.userId = userId;
 	}
+	/* -- FIN Correction Formulaire Création Utilisateur Bug-Non Bloquant N3  */
 
 	/**
 	 * @return userPwd : le mot de passe de l'utilisateur
