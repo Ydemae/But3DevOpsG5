@@ -43,20 +43,18 @@ public class Client extends Utilisateur {
 	@MapKey(name = "numeroCompte")
 	private Map<String, Compte> accounts;
 
-	/* -- Correction Formulaire Création Utilisateur Bug Non-Bloquant N3  */
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @throws IllegalArgumentException
+	 * @throws IllegalFormatException
 	 */
 	@Override
-	public void setUserId(String userId) throws IllegalArgumentException {
+	public void setUserId(String userId) throws IllegalFormatException {
 		if (!Client.checkFormatUserIdClient(userId)) {
-			throw new IllegalArgumentException("L'identifiant n'est pas au bon format.");
+			throw new IllegalFormatException("L'identifiant n'est pas au bon format.");
 		}
 		super.setUserId(userId);
 	}
-	/* -- FIN Correction Formulaire Création Utilisateur Bug Non-Bloquant N3  */
 
 	/**
 	 * Le numéro du client est unique mais ne correspond pas à l'identifiant de
@@ -102,7 +100,7 @@ public class Client extends Utilisateur {
 			String numeroClient) throws IllegalArgumentException, IllegalFormatException {
 		super(nom, prenom, adresse, homme, null, usrPwd, salt);
 		setUserId(usrId);
-		setNumeroClient(numeroClient.trim());
+		setNumeroClient(numeroClient);
 		this.accounts = new HashMap<>();
 	}
 
@@ -197,7 +195,7 @@ public class Client extends Utilisateur {
 	 *         correct, false sinon
 	 */
 	public static boolean checkFormatNumeroClient(String s) {
-		return Pattern.matches("^\\d{10}", s);
+		return Pattern.matches("\\d{10}", s);
 	}
 
 	/**
