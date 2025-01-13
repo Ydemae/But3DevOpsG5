@@ -68,6 +68,12 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
 -- Dumping data for table `Utilisateur`
 --
 
+-- INSERT INTO `Utilisateur` (`userId`, `nom`, `prenom`, `adresse`, `userPwd`, `male`, `type`, `numClient`) VALUES
+-- ('a', 'a', 'a', 'a', 'a', b'1', 'MANAGER', NULL),
+-- ('admin', 'Smith', 'Joe', '123, grande rue, Metz', 'adminpass', b'1', 'MANAGER', ''),
+-- ('client1', 'client1', 'Jane', '45, grand boulevard, Brest', 'clientpass1', b'1', 'CLIENT', '123456789'),
+-- ('client2', 'client2', 'Jane', '45, grand boulevard, Brest', 'clientpass2', b'1', 'CLIENT', '123456788');
+
 INSERT INTO `Utilisateur` (`userId`, `nom`, `prenom`, `adresse`, `userPwd`, `salt`, `male`, `type`, `numClient`) VALUES
 ('a', 'a', 'a', 'a', 'Kz8Oj9lxS0k0Am4kbv8nhTg9llz0vHRJMWkAX+7QQaWm4BJGocZhG7CpzFwWQpq+mzhB6xeTKMklmjCgtm7rfA==', "Xrn2WLdKeR/ma9RCE1EXEw==", b'1', 'MANAGER', NULL),
 ('admin', 'Smith', 'Joe', '123, grande rue, Metz', 'ROZJ1uEpLHXvx/xyqz2XOP/3GvImvDnGxbYx7Fn/BkpTQ4ENWUVlUMd/j4omOpFDxxdPTBImBmu9x5kJUK8WGQ==', "eWyC7OBi2OeviEnX/YRKSQ==",b'1', 'MANAGER', ''),
