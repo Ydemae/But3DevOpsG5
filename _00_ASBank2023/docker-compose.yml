@@ -16,6 +16,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    
   
   maven-builder:
     container_name: asbank_maven
@@ -30,6 +31,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    network_mode: "service:db"
       
 
   tomcat:
