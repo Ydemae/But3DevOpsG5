@@ -143,14 +143,16 @@ public abstract class Utilisateur {
 		return userId;
 	}
 
+	/* Correction Formulaire Création Utilisateur Bug -- BUG_Non_bloquant_Nr_3 */
 	/**
 	 * @param userId
 	 *            : l'identifiant de l'utilisateur
-	 * @throws IllegalFormatException
+	 * @throws IllegalArgumentException
 	 */
-	public void setUserId(String userId) throws IllegalFormatException {
+	public void setUserId(String userId) throws IllegalArgumentException {
 		this.userId = userId;
 	}
+	/* Fin Correction Formulaire Création Utilisateur Bug -- BUG_Non_bloquant_Nr_3 */
 
 	/**
 	 * @return userPwd : le mot de passe de l'utilisateur

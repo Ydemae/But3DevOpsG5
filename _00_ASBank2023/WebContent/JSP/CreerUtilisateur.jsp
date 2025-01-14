@@ -30,7 +30,7 @@
 			value="true" />
 		<s:radio label="Type" name="client"
 			list="#{true:'Client',false:'Manager'}" value="true" />
-		<s:textfield label="Numéro de client" name="numClient" />
+		<s:textfield label="Numéro de client" name="numClient" maxlength="10" />
 		<s:submit name="submit" />
 	</s:form>
 	<s:form name="myForm" action="retourTableauDeBordManager" method="POST">

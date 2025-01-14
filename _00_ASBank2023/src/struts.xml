@@ -161,28 +161,34 @@
 			</result>
 		</action>
 
-		
+		<!-- B5 : Correction de BUG Bloquant 2 Impossible d'ajouter un compte à un Utilisateur -->
 		<!-- Création de compte -->
 		<action name="addAccount" class="com.iut.banque.controller.CreerCompte"
 			method="creationCompte">
 			<result name="SUCCESS" type="redirectAction">
 				<param name="actionName">urlAddAccount</param>
-				<param name="client">%{client.userId}</param>
+				<param name="idClient">%{idClient}</param>
 				<param name="error">false</param>
 				<param name="result">true</param>
-				<param name="compte">%{compte}</param>
 				<param name="message">SUCCESS</param>
 			</result>
 			<result name="NONUNIQUEID" type="redirectAction">
 				<param name="actionName">urlAddAccount</param>
-				<param name="client">%{client.userId}</param>
+				<param name="idClient">%{idClient}</param>
 				<param name="error">true</param>
 				<param name="result">true</param>
 				<param name="message">NONUNIQUEID</param>
 			</result>
+			<result name="ERROR_ILLEGAL_OPERATION" type="redirectAction">
+				<param name="actionName">urlAddAccount</param>
+				<param name="idClient">%{idClient}</param>
+				<param name="error">true</param>
+				<param name="result">true</param>
+				<param name="message">ERROR_ILLEGAL_OPERATION</param>
+			</result>
 			<result name="INVALIDFORMAT" type="redirectAction">
 				<param name="actionName">urlAddAccount</param>
-				<param name="client">%{client.userId}</param>
+				<param name="idClient">%{idClient}</param>
 				<param name="error">true</param>
 				<param name="result">true</param>
 				<param name="message">INVALIDFORMAT</param>

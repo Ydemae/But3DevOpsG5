@@ -43,18 +43,21 @@ public class Client extends Utilisateur {
 	@MapKey(name = "numeroCompte")
 	private Map<String, Compte> accounts;
 
+
+	/* Correction Formulaire Création Utilisateur Bug -- BUG_Non_bloquant_Nr_3 */
 	/**
 	 * {@inheritDoc}
 	 * 
-	 * @throws IllegalFormatException
+	 * @throws IllegalArgumentException
 	 */
 	@Override
-	public void setUserId(String userId) throws IllegalFormatException {
+	public void setUserId(String userId) throws IllegalArgumentException {
 		if (!Client.checkFormatUserIdClient(userId)) {
-			throw new IllegalFormatException("L'identifiant n'est pas au bon format.");
+			throw new IllegalArgumentException("L'identifiant n'est pas au bon format.");
 		}
 		super.setUserId(userId);
 	}
+	/* Fin Correction Formulaire Création Utilisateur Bug -- BUG_Non_bloquant_Nr_3 */
 
 	/**
 	 * Le numéro du client est unique mais ne correspond pas à l'identifiant de
