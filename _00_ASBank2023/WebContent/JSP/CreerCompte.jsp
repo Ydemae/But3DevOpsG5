@@ -13,14 +13,15 @@
 
 <body>
 	<h1>Créer un nouveau compte</h1>
-
+		<!-- Correction Bug Bloquant N2 -->
 	<p>
 		Client choisi :
-		<s:property value="client" />
+		<s:property value="idClient" />
 	</p>
+	<!-- Fin Correction Bug Bloquant N2 -->
 	<s:form id="myForm" name="myForm" action="addAccount" method="POST">
-		<input type="hidden" name="client"
-			value="<s:property value='client.userId' />">
+		<input type="hidden" name="idClient"
+			value="<s:property value='idClient' />">
 		<s:textfield label="Numéro de compte" name="numeroCompte" />
 		<s:radio label="Type" name="avecDecouvert"
 			list="#{false:'Compte sans découvert',true:'Compte avec découvert'}"

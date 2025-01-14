@@ -41,7 +41,9 @@
 
 					<s:if test="(!aDecouvert)">
 						<td><s:url action="urlAddAccount" var="addAccount">
-								<s:param name="client">
+							<!-- Correction Bug Bloquant N2 -->
+								<s:param name="idClient">
+							<!-- Fin Correction Bug Bloquant N2 -->
 									<s:property value="value.userId" />
 								</s:param>
 							</s:url> <s:a href="%{addAccount}">
