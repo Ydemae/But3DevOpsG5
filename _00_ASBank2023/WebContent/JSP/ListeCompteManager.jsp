@@ -51,9 +51,11 @@
 									title="Créer un compte pour ce client" />
 							</s:a></td>
 						<td><s:url action="deleteUser" var="deleteUser">
-								<s:param name="client">
+								<!-- Correction Bug Bloquant N1 --> 
+								<s:param name="idClient">
 									<s:property value="value.userId" />
 								</s:param>
+								<!-- Fin Correction Bug Bloquant N1 --> 
 							</s:url> <s:a href="%{deleteUser}" onclick="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?')">
 								<img
 									src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/trash-.png"
@@ -91,13 +93,15 @@
 											style="width: 20px; height: 20px" alt="Editer ce compte"
 											title="Editer ce compte" />
 									</s:a></td>
+									<!-- Correction Bug Bloquant N1 --> 
 								<td><s:url action="deleteAccount" var="deleteAccount">
-										<s:param name="compte">
+										<s:param name="idCompte"> 
 											<s:property value="value.numeroCompte" />
 										</s:param>
-										<s:param name="client">
+										<s:param name="idClient">
 											<s:property value="value.owner.userId" />
 										</s:param>
+									<!-- Fin Correction Bug Bloquant N1 --> 
 									</s:url> <s:a href="%{deleteAccount}" onclick="return confirm('Voulez-vous vraiment supprimer ce compte ?')">
 										<img
 											src="https://cdn2.iconfinder.com/data/icons/windows-8-metro-style/512/trash-.png"
