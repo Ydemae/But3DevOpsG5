@@ -48,8 +48,10 @@ jobs:
       - name: Set up database connection
         run: |
           echo "${{ secrets.DATABASE_SCRIPT }}" > create_db.sql
-
-          sleep 20s
+          until mysql --host=localhost --user=root --password=root_password --execute="SELECT 1"; do
+            echo "Waiting for MySQL to be available..."
+            sleep 5s
+          done
 
           mysql --host=localhost --user=root --password=root_password --database=test_db < create_db.sql
 
