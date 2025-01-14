@@ -104,6 +104,15 @@ public class BanqueManager {
 		bank.setClients(dao.getAllClients());
 	}
 
+	// Correction Bug Bloquant N3
+		/**
+	 * Méthode pour vider les clients chargés
+	 */
+	public void cleanClients() {
+		bank.setClients(null);
+	}
+	// Fin Correction Bug Bloquant N3
+
 	/**
 	 * Méthode pour mettre à jour la liste des gestionnaires de la banque. Elle
 	 * contiendra la liste de tous les gestionnaires de la banque

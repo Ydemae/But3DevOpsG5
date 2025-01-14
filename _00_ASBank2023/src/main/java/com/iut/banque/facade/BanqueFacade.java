@@ -115,12 +115,15 @@ public class BanqueFacade {
 	}
 	/* Fin Correction BUG Bloquant Nr_1 */
 
+	// Correction BUG Bloquant N3
 	/**
 	 * Méthode pour déconnecter l'utilisateur.
 	 */
 	public void logout() {
+		banqueManager.cleanClients();
 		loginManager.logout();
 	}
+	// Fin Correctio Bug Bloquant
 
 	/**
 	 * Créer un compte sans découvert avec un solde de 0. L'utilisateur connecté
