@@ -10,7 +10,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<sonar.organization>QualDev</sonar.organization>
+		<sonar.organization>g5but3devops</sonar.organization>
 	</properties>
 
 	<build>
