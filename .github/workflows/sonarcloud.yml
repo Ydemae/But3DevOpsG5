@@ -48,6 +48,11 @@ jobs:
 
       - name: Set up database connection
         run: |
+
+          ls
+          echo "into scripts"
+          ls /_00_ASBank2023/script
+
           echo "${{ secrets.DATABASE_SCRIPT }}" > create_db.sql
           until mysql --host=127.0.0.1 --user=root --password=secret --execute="SELECT 1"; do
             echo "Waiting for MySQL to be available..."
