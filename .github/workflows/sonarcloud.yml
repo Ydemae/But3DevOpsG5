@@ -49,7 +49,7 @@ jobs:
       - name: Set up database connection
         run: |
 
-          ls /_00_ASBank2023
+          ls _00_ASBank2023/
 
           echo "${{ secrets.DATABASE_SCRIPT }}" > create_db.sql
           until mysql --host=127.0.0.1 --user=root --password=secret --execute="SELECT 1"; do
