@@ -27,4 +27,5 @@ jobs:
       run: |
         cd _00_ASBank2023/
         sleep 300
-        cat target/surefire-reports
+        cd target/surefire-reports
+        cat *
