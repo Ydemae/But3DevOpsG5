@@ -25,7 +25,7 @@ jobs:
     
     - name: Print maven logs
       run: |
-        cd _00_ASBank2023
+        cd _00_ASBank2023/target/surefire-reports
         sleep 300
-        ls target/surefire-reports
+        cat *
 #        cat maven-build.log
