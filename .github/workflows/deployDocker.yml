@@ -26,6 +26,9 @@ jobs:
     - name: Print maven logs
       run: |
         cd _00_ASBank2023
+        ls
+        sleep 5
+        ls target/
         sleep 290
         docker ps
         sleep 10
