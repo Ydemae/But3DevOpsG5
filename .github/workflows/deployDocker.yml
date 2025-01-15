@@ -21,4 +21,4 @@ jobs:
     - name: Deploy
       run: |
         cd _00_ASBank2023
-        timeout 300 docker compose up --build
+        timeout 300 docker compose up --build -d
