@@ -2,4 +2,4 @@ FROM maven:3-openjdk-11
 
 WORKDIR /app
 
-CMD ["mvn", "install"]
+CMD ["sh", "-c", "mvn install > /app/maven-build.log 2> /app/maven-error.log"]

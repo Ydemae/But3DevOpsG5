@@ -25,7 +25,8 @@ jobs:
     
     - name: Print maven logs
       run: |
+        cd _00_ASBank2023
         sleep 290
         docker ps
         sleep 10
-        docker logs asbank_maven
+        cat maven-build.log
