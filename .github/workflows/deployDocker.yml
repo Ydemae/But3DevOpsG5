@@ -22,4 +22,7 @@ jobs:
       run: |
         cd _00_ASBank2023
         timeout 300 docker compose up --build -d
+    
+    - name: Print maven logs
+      run: |
         docker logs asbank_maven
