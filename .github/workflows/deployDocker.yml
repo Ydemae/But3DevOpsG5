@@ -21,8 +21,8 @@ jobs:
     - name: Build Images
       run: |
         cd _00_ASBank2023
-        docker build -t mavenImage -f Dockerfile.maven ./Docker
-        docker build -t tomcatImage -f Dockerfile.tomcat ./Docker
+        docker build -t custom_maven_image -f Dockerfile.maven ./Docker
+        docker build -t custom_tomcat_image -f Dockerfile.tomcat ./Docker
         echo "Images have been built"
         docker compose build
 
