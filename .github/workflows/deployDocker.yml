@@ -28,4 +28,5 @@ jobs:
 
     - name: Deploy
       run: |
+        ls
         docker compose up
