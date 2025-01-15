@@ -28,5 +28,6 @@ jobs:
 
     - name: Deploy
       run: |
+        cd _00_ASBank2023
         ls
         docker compose up
