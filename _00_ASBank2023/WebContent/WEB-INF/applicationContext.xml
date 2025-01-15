@@ -46,9 +46,9 @@
 		<property name="driverClassName"
 			value="com.mysql.jdbc.Driver" />
 
-        <property name="url" value="jdbc:mysql://db:3306/allard19u_coa_banque" />
-        <property name="username" value="root" />
-        <property name="password" value="secret" />
+		<property name="url" value="jdbc:mysql://db:3306/allard19u_coa_banque" />
+        	<property name="username" value="root" />
+        	<property name="password" value="secret" />
 	</bean>
 
 	<!-- ============= Gestion des Transactions ============= -->
