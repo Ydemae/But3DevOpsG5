@@ -18,16 +18,15 @@ jobs:
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
-    - name: Build Images
-      run: |
-        cd _00_ASBank2023
-        docker build -t custom_maven_image -f Docker/Dockerfile.maven .
-        docker build -t custom_tomcat_image -f Docker/Dockerfile.tomcat .
-        echo "Images have been built"
-        docker compose build
+#    - name: Build Images
+#      run: |
+#        cd _00_ASBank2023
+#        docker build -t custom_maven_image -f Docker/Dockerfile.maven .
+#        docker build -t custom_tomcat_image -f Docker/Dockerfile.tomcat .
+#        echo "Images have been built"
+#        docker compose build
 
     - name: Deploy
       run: |
         cd _00_ASBank2023
-        ls
-        docker compose up
+        docker compose up --build
