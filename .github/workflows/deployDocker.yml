@@ -25,5 +25,7 @@ jobs:
     
     - name: Print maven logs
       run: |
-        sleep 50
+        sleep 290
+        docker ps
+        sleep 10
         docker logs asbank_maven
