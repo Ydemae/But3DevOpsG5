@@ -1,0 +1,31 @@
+name: Deploy docker
+
+on:
+  push:
+    branches: [ "Arthur", "main" ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+
+    - name: Build Images
+      run: |
+        cd _00_ASBank2023
+        docker build -t mavenImage -f Dockerfile.maven ./Docker
+        docker build -t tomcatImage -f Dockerfile.tomcat ./Docker
+        echo "Images have been built"
+        docker compose build
+
+    - name: Deploy
+      run: |
+        docker compose up
