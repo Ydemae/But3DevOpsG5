@@ -16,7 +16,7 @@
 	</div>
 	<h1>Tableau de bord - Gestionnaire</h1>
 	
-	<p>Bienvenue <b><s:property value="connectedUser.prenom" /> <s:property value="connectedUser.nom" /></b> !</p>
+	<p>Bienvenue <strong><s:property value="connectedUser.prenom" /> <s:property value="connectedUser.nom" /></strong> !</p>
 	<p>Que voulez vous faire ?</p>
 	<p>
 		<s:url action="listeCompteManager" var="urlListeCompteManager" >

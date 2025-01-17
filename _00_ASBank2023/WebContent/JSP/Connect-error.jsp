@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/ASBank203/style/style.css" />
 </head>
 <body>
-	<p><b>Erreur de connection !</b> Vous avez probablement entré de mauvais identifiants</p>
+	<p><strong>Erreur de connection !</strong> Vous avez probablement entré de mauvais identifiants</p>
 	<p>
 		<s:url action="redirectionLogin" var="redirectionLogin" ></s:url>
 		<s:a href="%{redirectionLogin}">Cliquez ici</s:a> pour revenir à l'écran de login</p>

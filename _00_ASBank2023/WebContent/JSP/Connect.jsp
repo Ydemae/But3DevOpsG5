@@ -17,15 +17,15 @@
 	</div>
 	<h1>Tableau de bord</h1>
 	<p>
-		Bienvenue <b><s:property value="connectedUser.prenom" /> <s:property
-				value="connectedUser.nom" /></b> !
+		Bienvenue <strong><s:property value="connectedUser.prenom" /> <s:property
+				value="connectedUser.nom" /></strong> !
 	</p>
 	<p>Voici l'état de vos comptes :</p>
-	<table>
+	<table aria-describedby="table de Connect">
 		<tr>
-			<th>Numéro de compte</th>
-			<th>Type de compte</th>
-			<th>Solde actuel</th>
+			<th scope="col">Numéro de compte</th>
+			<th scope="col">Type de compte</th>
+			<th scope="col">Solde actuel</th>
 		</tr>
 		<s:iterator value="accounts">
 			<tr>
