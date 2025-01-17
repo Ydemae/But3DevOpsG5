@@ -26,12 +26,6 @@
 		<img
 			src="https://imgs.search.brave.com/P23fBts9D6Ds8ARzf6vORrTmA21cwWe_3LWyN2eqDu8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9mb3Jt/YXRpb25zLnVuaXYt/bG9ycmFpbmUuZnIv/aW1nL3N1LzQ1Lmpw/Zw"
 			alt="logo" />
-
-			<!-- Ancien Code 
-				<img
-				src="https://www.iut-metz.univ-lorraine.fr/images/AdminSite/Logos/Logo_IUT_Metz.UL.small.png"
-				alt="logo" />
-			-->
 	</p>
 	<input type="button" value="Information" name="info"
 		onClick="DisplayMessage()" />

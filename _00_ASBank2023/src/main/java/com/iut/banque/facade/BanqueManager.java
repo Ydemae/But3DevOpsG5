@@ -27,7 +27,6 @@ public class BanqueManager {
 	 */
 	public BanqueManager() {
 		super();
-		// TODO injecter banque par Spring ?
 		bank = new Banque();
 	}
 

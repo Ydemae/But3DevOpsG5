@@ -9,8 +9,6 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 
-import com.iut.banque.exceptions.IllegalFormatException;
-
 /**
  * Classe représentant un utilisateur quelconque.
  * 
