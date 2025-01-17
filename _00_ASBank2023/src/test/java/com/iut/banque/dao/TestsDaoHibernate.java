@@ -1,6 +1,7 @@
 package com.iut.banque.dao;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
@@ -303,6 +304,19 @@ public class TestsDaoHibernate {
 	}
 
 	@Test
+	public void testDeleteUserNull() {
+		try {
+			daoHibernate.deleteUser(null);
+			fail("Une erreur aurait du être throw");
+		} catch (TechnicalException te) {
+		} catch ( Exception e) {
+			fail(e.getMessage());
+		}
+
+
+	}
+
+	@Test
 	public void testIsUserAllowedUser() {
 		String pwd = "TEST PASS";
 		String userString = "c.exist";
@@ -310,6 +324,41 @@ public class TestsDaoHibernate {
 		String mdpHashed = HashManager.hashPassword(pwd, user.getSalt())[0];
 
 		assertTrue(daoHibernate.isUserAllowed(user.getUserId(), mdpHashed));
+	}
+
+	@Test
+	public void testIsUserAllowedEmptyIdUser() {
+		String pwd = "TEST PASS";
+		String userString = "c.exist";
+		Utilisateur user = this.daoHibernate.getUserById(userString);
+		String mdpHashed = HashManager.hashPassword(pwd, user.getSalt())[0];
+
+		assertFalse(daoHibernate.isUserAllowed(" ",mdpHashed));
+	}
+
+	@Test
+	public void testIsUserAllowedNullIdUser() {
+		String pwd = "TEST PASS";
+		String userString = "c.exist";
+		Utilisateur user = this.daoHibernate.getUserById(userString);
+		String mdpHashed = HashManager.hashPassword(pwd, user.getSalt())[0];
+
+		assertFalse(daoHibernate.isUserAllowed(null,mdpHashed));
+	}
+
+	@Test
+	public void testIsUserAllowedNullPassword() {
+		String pwd = "TEST PASS";
+		String userString = "c.exist";
+		Utilisateur user = this.daoHibernate.getUserById(userString);
+		String mdpHashed = HashManager.hashPassword(pwd, user.getSalt())[0];
+
+		assertFalse(daoHibernate.isUserAllowed(user.getUserId(),null));
+	}
+
+	@Test
+	public void testIsUserAllowedNullIdAndPassword() {
+		assertFalse(daoHibernate.isUserAllowed(null,null));
 	}
 
 	@Test
@@ -332,7 +381,7 @@ public class TestsDaoHibernate {
 		Utilisateur user = this.daoHibernate.getUserById(userString);
 
 		try{
-			String mdpHashed = HashManager.hashPassword(pwd, user.getSalt())[0];
+			HashManager.hashPassword(pwd, user.getSalt());
 		} catch(Exception e) {
 			if (!(e instanceof NullPointerException)){
 				fail(e.getMessage());
@@ -411,12 +460,7 @@ public class TestsDaoHibernate {
 			e.printStackTrace();
 			fail("Il ne devrait pas y avoir d'exception ici");
 		}
-
-
-
 	}
-
-
 
 	// TODO À implémenter lorsque disconnect() le sera
 }

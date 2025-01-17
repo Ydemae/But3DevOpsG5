@@ -15,17 +15,8 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${SQL_Password}"]
       interval: 10s
       timeout: 5s
-      retries: 3
-
-  phpmyadmin:
-    container_name: asbank_phpmyadmin
-    image: ${PhpMyAdmin_Image}
-    restart: always
-    ports:
-      - "${PhpMyAdmin_Port_Host}:${PhpMyAdmin_Port}"
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: ${SQL_Password}
+      retries: 5
+    
   
   maven-builder:
     container_name: asbank_maven
@@ -38,7 +29,10 @@ services:
       - tomcat_data:/app/target/_00_ASBank2023-0.0.1-SNAPSHOT
       - ./target:/app/target
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+    network_mode: "service:db"
+      
 
   tomcat:
     container_name: asbank_tomcat
@@ -48,7 +42,7 @@ services:
       context: .
       dockerfile: Docker/Dockerfile.tomcat
     ports:
-      - "8081:8081"
+      - "8080:8080"
     depends_on:
       - db
 

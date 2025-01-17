@@ -23,6 +23,7 @@ public class CreerCompte extends ActionSupport {
 	private boolean avecDecouvert;
 	private double decouvertAutorise;
 	private transient Client client;
+	private transient String idClient; // Correction Bug Bloquant N2
 	private String message;
 	private boolean error;
 	private boolean result;
@@ -68,8 +69,25 @@ public class CreerCompte extends ActionSupport {
 	public void setError(boolean error) {
 		this.error = error;
 	}
+	// Correction Bug Bloquant N2
 
 	/**
+	 * @return the idClient
+	 */
+	public String getIdClient() {
+		return idClient;
+	}
+
+	/**
+	 * @param idClient
+	 *            the client to set
+	 */
+	public void setIdClient(String idClient) {
+		this.idClient = idClient;
+	}
+	// Fin Correction Bug Bloquant N2
+
+		/**
 	 * @param client
 	 *            the client to set
 	 */
@@ -185,6 +203,7 @@ public class CreerCompte extends ActionSupport {
 		this.result = result;
 	}
 
+	// Correction Bug Bloquant N2
 	/**
 	 * Action créant un compte client ou gestionnaire.
 	 * 
@@ -192,12 +211,17 @@ public class CreerCompte extends ActionSupport {
 	 */
 	public String creationCompte() {
 		try {
-			if (avecDecouvert) {
-				banque.createAccount(numeroCompte, client, decouvertAutorise);
+			client = banque.getClientById(idClient);
+			if(client != null) {
+				if (avecDecouvert) {
+					banque.createAccount(numeroCompte, client, decouvertAutorise);
+				} else {
+					banque.createAccount(numeroCompte, client);
+				}
+				this.compte = banque.getCompte(numeroCompte);				
 			} else {
-				banque.createAccount(numeroCompte, client);
+				throw new TechnicalException("Client introuvable");
 			}
-			this.compte = banque.getCompte(numeroCompte);
 			return "SUCCESS";
 		} catch (IllegalOperationException e) {
 			e.printStackTrace();
@@ -208,4 +232,5 @@ public class CreerCompte extends ActionSupport {
 			return "INVALIDFORMAT";
 		}
 	}
+	// Fin Correction Bug Bloquant N2
 }

@@ -23,6 +23,15 @@ public class ListeCompteManager extends ActionSupport {
 	private boolean aDecouvert;
 	private transient Compte compte;
 	private transient Client client;
+
+		/* Correction de BUG Bloquant Edit et Delete de compte par gestionnaire impossible 
+	sur compte vide et user sans compte -- BUG_Bloquant_Nr_1 */
+
+	private transient String idClient;
+	private transient String idCompte;
+
+	/* Fin Correction Bug Bloquant N_1 */
+	
 	private String userInfo;
 	private String compteInfo;
 
@@ -99,6 +108,40 @@ public class ListeCompteManager extends ActionSupport {
 		this.client = client;
 	}
 
+	/* Correction de BUG Bloquant Edit et Delete de compte par gestionnaire impossible 
+	sur compte vide et user sans compte -- BUG_Bloquant_Nr_1 */
+
+		/**
+	 * @return the idClient
+	 */
+	public String getIdClient() {
+		return idClient;
+	}
+
+	/**
+	 * @param idClient
+	 *            the idclient to set
+	 */
+	public void setIdClient(String idClient) {
+		this.idClient = idClient;
+	}
+
+			/**
+	 * @return the idCompte
+	 */
+	public String getIdCompte() {
+		return idCompte;
+	}
+
+	/**
+	 * @param idCompte
+	 *            the idCompte to set
+	 */
+	public void setIdCompte(String idCompte) {
+		this.idCompte = idCompte;
+	}
+	/* Fin Correction de Bug Bloquant N_1 */
+
 	/**
 	 * @return the userInfo
 	 */
@@ -129,6 +172,9 @@ public class ListeCompteManager extends ActionSupport {
 		this.compteInfo = compteInfo;
 	}
 
+	/* Correction de BUG Bloquant Edit et Delete de compte par gestionnaire impossible 
+	sur compte vide et user sans compte -- BUG_Bloquant_Nr_1 */
+
 	/**
 	 * Action appelée pour supprimer un utilisateur
 	 * 
@@ -136,6 +182,10 @@ public class ListeCompteManager extends ActionSupport {
 	 */
 	public String deleteUser() {
 		try {
+			client = banque.getClientById(idClient);
+			if (client == null){
+				throw new TechnicalException("Client introuvable ou gestionnaire");
+			}
 			setUserInfo(client.getIdentity());
 			banque.deleteUser(client);
 			return "SUCCESS";
@@ -155,7 +205,11 @@ public class ListeCompteManager extends ActionSupport {
 	 */
 	public String deleteAccount() {
 		try {
-			setCompteInfo(compte.getNumeroCompte());
+			compte = banque.getCompte(idCompte);
+			if(compte == null) {
+				throw new TechnicalException("Compte introuvable");
+			}
+			setCompteInfo(idCompte);
 			banque.deleteAccount(compte);
 			return "SUCCESS";
 		} catch (IllegalOperationException e) {
@@ -166,4 +220,5 @@ public class ListeCompteManager extends ActionSupport {
 			return "ERROR";
 		}
 	}
+	/* Fin Correction Bug Bloquant N_1 */
 }

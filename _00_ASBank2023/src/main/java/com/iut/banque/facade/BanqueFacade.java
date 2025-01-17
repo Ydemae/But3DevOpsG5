@@ -99,12 +99,31 @@ public class BanqueFacade {
 		return banqueManager.getAllClients();
 	}
 
+	/* Correction de BUG Bloquant Edit et Delete de compte par gestionnaire impossible 
+	sur compte vide et user sans compte -- BUG_Bloquant_Nr_1 */
+	/**
+	 * Méthode pour récupérer un client à l'aide de son Id
+	 * 
+	 * @return Client
+	 */
+	public Client getClientById(String idClient) {
+		Utilisateur user = banqueManager.getUserById(idClient);
+		if( user instanceof Client) {
+			return (Client)user;
+		}
+		return null;
+	}
+	/* Fin Correction BUG Bloquant Nr_1 */
+
+	// Correction BUG Bloquant N3
 	/**
 	 * Méthode pour déconnecter l'utilisateur.
 	 */
 	public void logout() {
+		banqueManager.cleanClients();
 		loginManager.logout();
 	}
+	// Fin Correctio Bug Bloquant
 
 	/**
 	 * Créer un compte sans découvert avec un solde de 0. L'utilisateur connecté
