@@ -17,7 +17,7 @@
 	</div>
 	<h1>Tableau de bord</h1>
 	<p>
-		Bienvenue <strong><s:property value="connectedUser.prenom" /> <s:property
+		Bienvenue <strong id="user-welcome"><s:property value="connectedUser.prenom" /> <s:property
 				value="connectedUser.nom" /></strong> !
 	</p>
 	<p>Voici l'état de vos comptes :</p>

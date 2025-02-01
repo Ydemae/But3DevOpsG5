@@ -89,6 +89,14 @@ public class TestsSelenium {
             Assert.fail("The login inputs couldn't be found");
         }
 
+        try{
+            String userWelcome = driver.findElement(By.id("user-welcome")).getText();
+            Assert.assertEquals("Jane client1",userWelcome);
+        }
+        catch (NoSuchElementException e){
+            Assert.fail("The user couldn't connect successfully");
+        }
+
         driver.close();
     }
 
