@@ -1,5 +1,6 @@
 package com.iut.banque.selenium;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,8 @@ public class TestsSelenium {
     private Map<String, Object> vars;
     JavascriptExecutor js;
 
+    private String appPath = "http://localhost:8081/_00_ASBank2023/";
+
 
     @Before
     public void setUp() {
@@ -33,7 +36,13 @@ public class TestsSelenium {
 
     @Test
     public void testLogo() {
-        driver.get("http://localhost:8081/_00_ASBank2023/");
+        try{
+            driver.get(appPath);
+        }
+        catch (WebDriverException e) {
+            System.out.println("The app couldn't be accessed, Selenium tests aborted");
+            return;
+        }
         driver.manage().window().setSize(new Dimension(550, 694));
         try{
             WebElement logo = driver.findElement(By.id("logo"));
@@ -42,6 +51,44 @@ public class TestsSelenium {
         catch (NoSuchElementException e) {
             Assert.fail("The logo couldn't be found");
         }
+        driver.close();
+    }
+
+    @Test
+    public void testLogin() {
+        try{
+            driver.get(appPath);
+        }
+        catch (WebDriverException e) {
+            System.out.println("The app couldn't be accessed, Selenium tests aborted");
+            return;
+        }
+        driver.manage().window().setSize(new Dimension(550, 694));
+
+        try{
+            WebElement loginButton = driver.findElement(By.id("login-button"));
+            Assert.assertNotNull(loginButton);
+
+            loginButton.click();
+        }
+        catch (NoSuchElementException e) {
+            Assert.fail("The login button couldn't be found");
+        }
+
+        try{
+            WebElement userCdeInput = driver.findElement(By.id("controller_Connect_login_action_userCde"));
+            WebElement userPwdInput = driver.findElement(By.id("controller_Connect_login_action_userPwd"));
+            WebElement loginSubmitButton = driver.findElement(By.id("controller_Connect_login_action_submit"));
+
+
+            userCdeInput.sendKeys("client1");
+            userPwdInput.sendKeys("clientpass1");
+            loginSubmitButton.click();
+        }
+        catch (NoSuchElementException e){
+            Assert.fail("The login inputs couldn't be found");
+        }
+
         driver.close();
     }
 
