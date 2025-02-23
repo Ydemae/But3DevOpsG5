@@ -1,5 +1,9 @@
-FROM maven:3-openjdk-11
+FROM markhobson/maven-chrome:jdk-11
 
 WORKDIR /app
+
+COPY . .
+
+RUN mvn install -DskipTests
 
 CMD ["sh", "-c", "mvn install > /app/maven-build.log 2> /app/maven-error.log"]

@@ -16,7 +16,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    
+    network_mode: "host"
   
   maven-builder:
     container_name: asbank_maven
@@ -31,9 +31,8 @@ services:
     depends_on:
       db:
         condition: service_healthy
-    network_mode: "service:db"
+    network_mode: "host"
       
-
   tomcat:
     container_name: asbank_tomcat
     volumes:
@@ -43,8 +42,7 @@ services:
       dockerfile: Docker/Dockerfile.tomcat
     ports:
       - "8080:8080"
-    depends_on:
-      - db
+    network_mode: "host"
 
 volumes:
   db-data:
