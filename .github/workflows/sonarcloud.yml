@@ -64,4 +64,3 @@ jobs:
         run: |
           cd _00_ASBank2023
           mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Ydemae_But3DevOpsG5 -Dsonar.organization=g5but3devops
-          mvn clean install
