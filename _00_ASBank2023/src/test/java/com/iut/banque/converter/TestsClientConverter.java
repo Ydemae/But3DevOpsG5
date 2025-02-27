@@ -2,8 +2,6 @@ package com.iut.banque.converter;
 
 import com.iut.banque.exceptions.IllegalFormatException;
 import com.iut.banque.modele.Client;
-import com.iut.banque.modele.CompteAvecDecouvert;
-import com.iut.banque.modele.CompteSansDecouvert;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
